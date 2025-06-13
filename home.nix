@@ -1,12 +1,114 @@
-{ config, pkgs, ... }:
+{config, pkgs, ... }:
 
 {
+#   imports =[
+#
+#	./configs/hypr/hypr.nix
+ #  ];
+
+#  <==><==><==> <==><==><==><==><==><==><==><==><==><==><==><==> <==><==><==> 
+
+#  <==><==><==> <==><==><==><==><==><==><==><==><==><==><==><==> <==><==><==> 
+
+#  <==><==><==> <==><==><==><==><==><==><==><==><==><==><==><==> <==><==><==> 
+# __________________
+#< hyperland config >
+# ------------------
+#        \   ^__^
+#         \  (oo)\_______
+#            (__)\       )\/\
+#                ||----w |
+#                ||     ||
 
 
-   imports =[
 
-	./configs/hypr/hypr.nix
-   ];
+
+
+
+
+
+
+
+
+
+  programs.kitty.enable = true; # required for the default Hyprland config
+
+
+
+  wayland.windowManager.hyprland = {
+    enable = true;
+
+    settings = {
+      "$mod" = "SUPER";
+
+      exec-once = [
+        "swaync"
+        "waybar"
+	"hyprpaper"
+      ];
+
+      # Monitor config
+      monitor = "LG, highres, auto,1.5";
+      
+
+      # General
+
+      
+
+      #"border_size" = "0.75";
+
+         # Gaps
+       #   "gaps_in"= "7.5";
+
+        #  "gaps_out" = "30";
+
+	 
+
+      bind =
+        [
+          "$mod,F, exec, firefox"
+          "$mod SHIFT,S, exec, hyprshot -m region"
+          "ALT, SPACE, exec, rofi -show drun"
+          "$mod,Q, killactive"
+	  "ALT, Tab, exec, rofi -show window"
+          "$mod SHIFT,E, exec, rofi -show filebrowser"  
+          "$mod,E, exec,  dolphin"  
+	]
+
+	
+        ++ (
+          builtins.concatLists (builtins.genList (i:
+            let
+              ws = i + 1;
+            in [
+              "$mod, code:1${toString i}, workspace, ${toString ws}"
+              "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+            ])
+          9)
+        );
+    };
+  };
+
+  home.sessionVariables.NIXOS_OZONE_WL = "1";
+
+
+
+
+
+#  <==><==><==> <==><==><==><==><==><==><==><==><==><==><==><==> <==><==><==> 
+# __________________
+#< End hyperland config >
+# ------------------
+#        \   ^__^
+#         \  (oo)\_______
+#            (__)\       )\/\
+#                ||----w |
+#                ||     ||
+
+
+
+
+
 
 
   
@@ -37,8 +139,6 @@
 
 
 
-  # Kitty momentaneo 
-  programs.kitty.enable = true;
 
 
 
@@ -82,20 +182,33 @@
     
     # Hyperland requirements
     
-
+    hyprshot
     hyprpaper
     hyprlock
     hypridle    
     hyprpolkitagent
     qt5.qtwayland
     qt6.qtwayland
-
+    hyprpicker
 
 
     # Desktop
     waybar
     rofi-wayland
     swaynotificationcenter
+    pywal
+    neofetch
+    smassh
+
+    # Utilities
+
+    imagemagick
+    pavucontrol
+    swayimg
+    rofi-file-browser
+    tmux
+    rofi-power-menu
+
 
     #Knowledge
 
@@ -123,7 +236,7 @@
     ]))
     jetbrains.pycharm-community
 
-    # Stuff
+    # Productivity
     gimp3
 
     
@@ -136,7 +249,7 @@
     clippy
   ];
 
-  # conigs
+  # configs
 
     programs.wezterm = {
     enable = true;
@@ -167,9 +280,17 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
     ".config/rofi/config.rasi".source = ./configs/rofi/config.rasi;
+    ".config/waybar/config.json".source = ./configs/waybar/config.json;
+    ".config/waybar/style.css".source = ./configs/waybar/style.css;
 
     
   };
+
+
+    
+
+
+    
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a

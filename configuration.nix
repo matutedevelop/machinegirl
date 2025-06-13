@@ -11,6 +11,17 @@
       inputs.home-manager.nixosModules.home-manager
     ];
 
+
+# Hyperland
+
+programs.hyprland.enable = true;
+programs.hyprland.package = inputs.hyperland.packages.${pkgs.system}.hyprland;
+
+
+
+
+
+
   # PipeWire
   # Remove sound.enable or set it to false if you had it set previously, as sound.enable is only meant for ALSA-based configurations
 
@@ -52,6 +63,16 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.useDHCP = false;
+
+
+
+
+
+
+
+
+
 
   # Set your time zone.
   time.timeZone = "America/Mexico_City";
@@ -144,7 +165,6 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
-  jetbrains.pycharm-community
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

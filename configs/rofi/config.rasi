@@ -1,6 +1,4 @@
 * {
-    font: "Monoid Nerd Font Mono 12";
-
     g-spacing: 10px;
     g-margin: 0;
     b-color: #000000FF;
@@ -97,6 +95,6 @@ element selected.normal {
 }
 
 message {
-    background-color: red;
+    background-color: "#6b3639";
     border: 0px solid;
 }
