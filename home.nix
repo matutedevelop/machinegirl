@@ -2,7 +2,7 @@
 
 {
 #   imports =[
-#
+
 #	./configs/hypr/hypr.nix
  #  ];
 
@@ -72,7 +72,7 @@
           "$mod,Q, killactive"
 	  "ALT, Tab, exec, rofi -show window"
           "$mod SHIFT,E, exec, rofi -show filebrowser"  
-          "$mod,E, exec,  dolphin"  
+          "$mod,E, exec,  nemo"  
 	]
 
 	
@@ -108,6 +108,27 @@
 
 
 
+  # GTK 
+
+  gtk = {
+
+  enable = true;
+  theme = {
+    package = pkgs.gruvbox-gtk-theme;
+    name = "Gruvbox-Dark";
+    };
+  font = {
+    name = "IosevkaTerm Nerd Font";
+    size = 14;
+    };
+
+    iconTheme = {
+    package = pkgs.tela-circle-icon-theme;
+    name = "Tela-red-dark"; # A menudo el tema de iconos tiene el mismo nombre
+
+  };
+
+  };
 
 
 
@@ -179,6 +200,10 @@
     neo-cowsay
     neovim
     kitty
+    yazi-unwrapped
+    # zoxide
+    lunarvim
+    
     
     # Hyperland requirements
     
@@ -198,7 +223,9 @@
     swaynotificationcenter
     pywal
     neofetch
+    fastfetch
     smassh
+    nemo-with-extensions
 
     # Utilities
 
@@ -214,6 +241,11 @@
 
     zathura
     obsidian
+
+    # Haskell
+    haskell-ci
+
+
 
     # python 
 
@@ -264,6 +296,12 @@
   };
 
 
+  programs.zoxide = {
+  enable = true;
+  enableBashIntegration = true;
+  };
+
+
 
 
 
@@ -280,7 +318,7 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
     ".config/rofi/config.rasi".source = ./configs/rofi/config.rasi;
-    ".config/waybar/config.json".source = ./configs/waybar/config.json;
+    ".config/waybar/config".source = ./configs/waybar/config.json;
     ".config/waybar/style.css".source = ./configs/waybar/style.css;
 
     
@@ -318,6 +356,21 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  # Bash
+  programs.bash = {
+    enable = true;
+    shellAliases = {
+
+ #     z = "zoxide";
+      rebuild = "sudo nixos-rebuild switch --flake /etc/nixos/#arroio";
+
+    };
+
+  };
+
+
+
 
 
 
