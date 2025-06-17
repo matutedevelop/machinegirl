@@ -320,7 +320,9 @@
     ".config/rofi/config.rasi".source = ./configs/rofi/config.rasi;
     ".config/waybar/config".source = ./configs/waybar/config.json;
     ".config/waybar/style.css".source = ./configs/waybar/style.css;
+    # neovim config
 
+    ".config/nvim/init.lua".source = ./configs/nvim/init.lua;
     
   };
 
