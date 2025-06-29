@@ -44,25 +44,73 @@
       exec-once = [
         "swaync"
         "waybar"
-	"hyprpaper"
+
+    # Fondo de pantalla === === === === === === === === ===
+    "hyprpaper"
+    "sleep 0.5 && hyprctl hyprpaper preload /home/arroio/Pictures/fondo_nuevo.png"
+    "sleep 1 && hyprctl hyprpaper wallpaper ,/home/arroio/Pictures/fondo_nuevo.png"
+    "wal -i ~/Pictures/fondo_nuevo.png"
       ];
 
       # Monitor config
-      monitor = "LG, highres, auto,1.5";
+      monitor = "DP-1, 2560x1080@60, 0x0,1";
+     
+# === === === === === === === === === === === === === === === === === === 
+# General === === === === === === === === === === === === === === === === 
+# === === === === === === === === === === === === === === === === === === 
+     general = {     
+
+
       
 
-      # General
+     "border_size" = "1";
 
-      
+       "gaps_in" = "10";
 
-      #"border_size" = "0.75";
+       "gaps_out" = "40";
 
-         # Gaps
-       #   "gaps_in"= "7.5";
+       "gaps_workspaces" = "5";
 
-        #  "gaps_out" = "30";
+       "resize_on_border" = "true";
+	 };
+     
 
-	 
+
+# === === === === === === === === === === === === === === === === === === 
+# Decoration === === === === === === === === === === === === === === === === 
+# === === === === === === === === === === === === === === === === === === 
+
+    decoration = {
+
+        "rounding" = "5";
+
+        "rounding_power" = "3";
+
+        "inactive_opacity" = "0.7";
+        
+        "active_opacity" = "0.9";
+        
+        "fullscreen_opacity" = "1";
+        
+    blur = {
+
+        "size" = "12";
+
+        "passes" = "2";
+
+        "popups" = "true";
+
+        "brightness" = "1";
+ 
+        "contrast" = "1.3";
+
+
+    };
+
+    };
+
+
+
 
       bind =
         [
@@ -73,6 +121,48 @@
 	  "ALT, Tab, exec, rofi -show window"
           "$mod SHIFT,E, exec, rofi -show filebrowser"  
           "$mod,E, exec,  nemo"  
+
+          # Dispatchers === === === === === === ===
+
+
+            # Navegacion <==> <==> <==> <==> <==>
+            "SHIFT, H, movefocus, l"
+            "SHIFT, J, movefocus, d"
+            "SHIFT, K, movefocus, u"
+            "SHIFT, L, movefocus, r"
+
+
+
+            # Mover ventanas <==> <==> <==> <==> <==>
+
+            "ALT, H, movewindow, l"
+            "ALT, J, movewindow, d"
+            "ALT, K, movewindow, u"
+            "ALT, L, movewindow, r"
+
+            "$mod, 0, fullscreen"
+            "$mod, p, togglefloating"
+
+            # Scroll con flechas
+
+   #         "CONTROL, down, exec, wlrctl pointer scroll 120 0 "
+   #         "CONTROL, up, exec, wlrctl pointer scroll -120 0"
+
+
+            # Move to workspace
+            #"$mod ALT, 1, movetoworkspace, 1"
+            #"$mod ALT, 2, movetoworkspace, 2"
+            #"$mod ALT, 3, movetoworkspace, 3"
+            #"$mod ALT, 4, movetoworkspace, 4"
+            #"$mod ALT, 5, movetoworkspace, 5"
+            #"$mod ALT, 6, movetoworkspace, 6"
+            #"$mod ALT, 7, movetoworkspace, 7"
+            #"$mod ALT, 8, movetoworkspace, 8"
+            #"$mod ALT, 9, movetoworkspace, 9"
+
+
+
+
 	]
 
 	
@@ -183,10 +273,11 @@
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
     #(pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" "JetBrainsMono" "IosevkaTerm" "Monoid"]; })
-    nerd-fonts.fantasque-sans-mono
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.iosevka-term
-    nerd-fonts.monoid
+    #nerd-fonts.fantasque-sans-mono
+    #nerd-fonts.jetbrains-mono
+    #nerd-fonts.iosevka-term
+    #nerd-fonts.monoid
+    #nerd-fonts.fira-code
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
     # # environment:
@@ -235,6 +326,9 @@
     rofi-file-browser
     tmux
     rofi-power-menu
+    # tint
+    # dotool
+    wlrctl
 
 
     #Knowledge
@@ -272,9 +366,10 @@
     gimp3
 
     
+    # C
+    gcc
 
-
-    #rust
+    # Rust
     rustc
     rustfmt
     cargo
@@ -301,8 +396,7 @@
   enableBashIntegration = true;
   };
 
-
-
+ 
 
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -322,7 +416,7 @@
     ".config/waybar/style.css".source = ./configs/waybar/style.css;
     # neovim config
 
-    ".config/nvim/init.lua".source = ./configs/nvim/init.lua;
+    ".config/nvim".source = ./configs/nvim;
     
   };
 
@@ -366,15 +460,12 @@
 
  #     z = "zoxide";
       rebuild = "sudo nixos-rebuild switch --flake /etc/nixos/#arroio";
+      explorer = "yazi";
+      fast = "fastfetch";
 
     };
 
   };
-
-
-
-
-
 
 }
 

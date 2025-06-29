@@ -165,6 +165,11 @@ programs.hyprland.package = inputs.hyperland.packages.${pkgs.system}.hyprland;
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
+    nerd-fonts.fantasque-sans-mono
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.iosevka-term
+    nerd-fonts.monoid
+    nerd-fonts.fira-code
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -185,6 +190,19 @@ programs.hyprland.package = inputs.hyperland.packages.${pkgs.system}.hyprland;
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+
+  fonts.fontconfig.enable = true;
+  fonts.packages = with pkgs;[
+     nerd-fonts.fantasque-sans-mono
+     nerd-fonts.jetbrains-mono
+     nerd-fonts.iosevka-term
+     nerd-fonts.monoid
+     nerd-fonts.fira-code
+     nerd-fonts.victor-mono
+  ];
+
+
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
