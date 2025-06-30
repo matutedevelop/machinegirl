@@ -1,9 +1,3 @@
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=4")
-vim.cmd("set softtabstop=4")
-vim.cmd("set shiftwidth=4")
-vim.g.mapleader = " "
-
 
 -- Bootstrap lazy.nvim jfklajasdjl:
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -46,23 +40,8 @@ vim.g.maplocalleader = "\\"
 local opts = {}
 
 require("lazy").setup("plugins")
-require("catppuccin").setup()
-vim.cmd.colorscheme "catppuccin"
-
+require("vim-options")
  -- telescope
-local builtin = require("telescope.builtin")
-vim.keymap.set('n','<C-p>', builtin.find_files, {})
-vim.keymap.set('n','<leader>fg', builtin.live_grep, {})
-
 -- treesitter
-local config = require("nvim-treesitter.configs")
-config.setup({
-  ensure_installed = {"lua","python","c","html","rust","go","haskell","r","java"},
-  highlight = { enable = true }, 
-  indent = { enable = true},
-})
-
 -- Neotree
-
-vim.keymap.set('n','<C-b>',':Neotree filesystem reveal left<CR>',{})
 

@@ -360,7 +360,7 @@
     numba
 
     ]))
-    jetbrains.pycharm-community
+    jetbrains.pycharm-professional
 
     # Productivity
     gimp3
@@ -462,6 +462,7 @@
       rebuild = "sudo nixos-rebuild switch --flake /etc/nixos/#arroio";
       explorer = "yazi";
       fast = "fastfetch";
+      wal = "wal -i";
 
     };
 
