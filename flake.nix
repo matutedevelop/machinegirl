@@ -6,6 +6,9 @@
 
     hyperland.url = "github:hyprwm/Hyprland";
 
+    plugin-lazy-nix-helper.url = "github:b-src/lazy-nix-helper.nvim";
+    plugin-lazy-nix-helper.flake = false;
+
 
 
     home-manager = {

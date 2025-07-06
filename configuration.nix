@@ -170,6 +170,10 @@ programs.hyprland.package = inputs.hyperland.packages.${pkgs.system}.hyprland;
     nerd-fonts.iosevka-term
     nerd-fonts.monoid
     nerd-fonts.fira-code
+
+    # Stuff para dataspell
+
+
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -201,6 +205,12 @@ programs.hyprland.package = inputs.hyperland.packages.${pkgs.system}.hyprland;
      nerd-fonts.fira-code
      nerd-fonts.victor-mono
   ];
+    
+
+    # Env variables
+    
+    # For Dataspell
+    environment.variables.LD_LIBRARY_PATH = "${pkgs.gcc.cc.lib}/lib";
 
 
 

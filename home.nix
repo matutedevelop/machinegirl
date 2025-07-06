@@ -289,12 +289,16 @@
     home-manager
     git
     neo-cowsay
-    neovim
+    #neovim
     kitty
     yazi-unwrapped
     # zoxide
     lunarvim
     
+    
+
+    # Java
+    jdk
     
     # Hyperland requirements
     
@@ -326,7 +330,7 @@
     rofi-file-browser
     tmux
     rofi-power-menu
-    # tint
+    tint
     # dotool
     wlrctl
 
@@ -345,6 +349,12 @@
 
     (python313.withPackages(ps: with ps; [ 
     
+    # Jupyter
+    pip
+    notebook
+    jupyterlab
+
+
     pandas
     geopandas
     requests
@@ -358,9 +368,13 @@
     pytorch
     jax
     numba
+    pydantic
 
     ]))
     jetbrains.pycharm-professional
+    # jetbrains.pycharm-community
+    jetbrains.dataspell
+    pyrefly
 
     # Productivity
     gimp3
@@ -368,6 +382,7 @@
     
     # C
     gcc
+    zeromq
 
     # Rust
     rustc
@@ -397,6 +412,78 @@
   };
 
  
+# Neovim === === === === === === === === === 
+
+# La mayoria de los plugins se desea de administrar atraves de Lazy y declarando los dotfiles con home-manager, este apartado es exclusivo para aquellos plugins que no puedan ser instalados de esta forma _e.g._ linters, formatters, lsp
+
+
+
+
+
+
+    programs.neovim = {
+        enable = true;
+        viAlias = true;
+        vimAlias = true;
+
+        #plugins = with pkgs.vimPlugins;[
+        # nvim-lspconfig       # El plugin principal para configurar LSPs
+         #nvim-cmp             # Motor de autocompletado
+         #cmp-nvim-lsp         # Fuente LSP para nvim-cmp
+         #cmp_luasnip          # Fuente de snippets para nvim-cmp
+         #conform-nvim         # Gestor de formatters
+         #nvim-lint            # Gestor de linters
+
+
+        #];
+
+    extraPackages = with pkgs; [
+
+          # Python
+          (python3.withPackages (ps: with ps; [
+            setuptools # Required by pylama for some reason
+            pylama
+            isort
+            yamllint
+            debugpy
+          ]))
+          ruff
+          python313Packages.python-lsp-server
+
+
+
+          # Lua
+          lua-language-server
+          selene
+          stylua
+
+          # Nix
+          statix
+          nixpkgs-fmt
+          nil
+
+          # C, C++
+          clang-tools
+          cppcheck
+
+          # Rust
+          rust-analyzer
+          clippy
+          rustfmt
+
+
+          # Go
+          go
+          gopls
+          golangci-lint
+          delve
+
+      ];
+
+
+    };
+
+
 
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -414,9 +501,15 @@
     ".config/rofi/config.rasi".source = ./configs/rofi/config.rasi;
     ".config/waybar/config".source = ./configs/waybar/config.json;
     ".config/waybar/style.css".source = ./configs/waybar/style.css;
+ 
     # neovim config
 
     ".config/nvim".source = ./configs/nvim;
+
+    # Zathura
+
+    ".config/zathura".source = ./configs/zathura;
+
     
   };
 

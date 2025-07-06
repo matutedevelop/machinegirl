@@ -382,6 +382,22 @@
         "type": "github"
       }
     },
+    "plugin-lazy-nix-helper": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1742356601,
+        "narHash": "sha256-4DyuBMp83vM344YabL2SklQCg6xD7xGF5CvQP2q+W7A=",
+        "owner": "b-src",
+        "repo": "lazy-nix-helper.nvim",
+        "rev": "22d0f4d737104cba6c18ba9ca3ff1db5160c67b5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "b-src",
+        "repo": "lazy-nix-helper.nvim",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -409,7 +425,8 @@
       "inputs": {
         "home-manager": "home-manager",
         "hyperland": "hyperland",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "plugin-lazy-nix-helper": "plugin-lazy-nix-helper"
       }
     },
     "systems": {
