@@ -3,6 +3,7 @@
 {
    imports =[
 	./configs/hypr/hypr.nix
+	./configs/tmux/tmux.nix
    ];
 
 
@@ -139,7 +140,6 @@
     pavucontrol
     swayimg
     rofi-file-browser
-    tmux
     rofi-power-menu
     tint
     # dotool
@@ -181,7 +181,9 @@
     numba
     pydantic
     pywal
-
+    colorthief
+    colorzero
+    colormath
     ]))
     jetbrains.pycharm-professional
     # jetbrains.pycharm-community
@@ -378,8 +380,8 @@
       rebuild = "sudo nixos-rebuild switch --flake /etc/nixos/#arroio";
       explorer = "yazi";
       fast = "fastfetch";
-      wal = "wal -i";
       py = "python";
+      pip2nix = "nix run github:nix-community/pip2nix";
 
     };
 
