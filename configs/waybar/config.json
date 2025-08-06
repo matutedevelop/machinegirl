@@ -15,7 +15,7 @@
                 "empty": ""
             },
             "persistent-workspaces": {
-                "*": [ 1,2,3]
+                "*": [1,2,3]
             }
         },
      "custom/power": {
@@ -37,6 +37,7 @@
             "format": "{:%I:%M:%S %p} ",
             "interval": 1,   
             "tooltip-format": "<tt>{calendar}</tt>",
+            "on-click": "wezterm start -- bash -c 'todoist'",
             "calendar": {
                 "format": {
                     "today": "<span color='#fAfBfC'><b>{}</b></span>"
@@ -54,7 +55,7 @@
             "tooltip-format-disconnected": "Error",
             "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
             "tooltip-format-ethernet": "{ifname} 🖧 ",
-            "on-click": "wezterm nmtui"
+            "on-click": "wezterm start -- bash -c 'nmtui'"
         },
         "bluetooth": {
             "format-on": "󰂯",

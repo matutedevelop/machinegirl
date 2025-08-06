@@ -1,9 +1,10 @@
-{config, pkgs, ... }:
+{config, pkgs, inputs,... }:
 
 {
    imports =[
 	./configs/hypr/hypr.nix
 	./configs/tmux/tmux.nix
+    inputs.spicetify-nix.homeManagerModules.default
    ];
 
 
@@ -58,20 +59,6 @@
   # -----------------------------------------------------------------------
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
@@ -100,12 +87,19 @@
     home-manager
     git
     neo-cowsay
+    pokemon-colorscripts-mac
     #neovim
     kitty
     yazi-unwrapped
     # zoxide
-    lunarvim
+    # lunarvim
+    n8n
+    fzf
+    bat
+    ripgrep
     
+    # zen
+    inputs.zen-browser.packages.${pkgs.system}.default
     
 
     # Java
@@ -133,6 +127,12 @@
     smassh
     nemo-with-extensions
     waypaper
+    beatprints
+    # spotify
+    # spicetify-cli
+    cava
+    discord
+
 
     # Utilities
 
@@ -157,7 +157,7 @@
 
 
     # python 
-
+    uv
     (python313.withPackages(ps: with ps; [ 
     
     # Jupyter
@@ -167,6 +167,7 @@
 
 
     pandas
+    plotly
     geopandas
     requests
     numpy
@@ -177,13 +178,17 @@
     scikit-learn
     statsmodels
     pytorch
+    yfinance
     jax
     numba
     pydantic
     pywal
     colorthief
-    colorzero
-    colormath
+    #colorzero
+    #colormath
+    flet
+    flet-web
+    flet-desktop
     ]))
     jetbrains.pycharm-professional
     # jetbrains.pycharm-community
@@ -192,7 +197,7 @@
 
     # Productivity
     gimp3
-
+    todoist
     
     # C
     gcc
@@ -205,13 +210,44 @@
     clippy
   ];
 
-  # configs
+
+
+
+  #  === === === === === === === === === === === === === === === === === === ===
+  # configs === === === === === === === === === === === === === === === === ===
+  #  === === === === === === === === === === === === === === === === === === ===
 
     programs.wezterm = {
     enable = true;
     extraConfig = builtins.readFile ./configs/wezterm/wezterm.lua;
   };
 
+    programs.spicetify =
+    let
+      spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+    in
+    {
+      enable = true;
+
+      enabledExtensions = with spicePkgs.extensions; [
+        adblock
+        hidePodcasts
+        shuffle # shuffle+ (special characters are sanitized out of extension names)
+        powerBar
+        groupSession
+      ];
+      enabledCustomApps = with spicePkgs.apps; [
+        newReleases
+        ncsVisualizer
+      ];
+      enabledSnippets = with spicePkgs.snippets; [
+        rotatingCoverart
+        pointer
+      ];
+
+      theme = spicePkgs.themes.text;
+     # colorScheme = "Kanagawa";
+    };
 
     programs.git = {
     enable = true;
@@ -225,7 +261,23 @@
   enableBashIntegration = true;
   };
 
- 
+
+  # Bash
+  programs.bash = {
+    enable = true;
+    initExtra = "walr";
+    shellAliases = {
+
+      rebuild = "sudo nixos-rebuild switch --flake /etc/nixos/#arroio";
+      explorer = "yazi";
+      fast = "fastfetch";
+      py = "python";
+      pip2nixx = "nix run github:nix-community/pip2nix";
+      walr = "cat /home/arroio/.cache/wal/sequences";
+      fzz = ''nvim $(fzf -m --preview="bat --color=always {}")'';
+
+    };
+  };
 # Neovim === === === === === === === === === 
 
 # La mayoria de los plugins se desea de administrar atraves de Lazy y declarando los dotfiles con home-manager, este apartado es exclusivo para aquellos plugins que no puedan ser instalados de esta forma _e.g._ linters, formatters, lsp
@@ -335,7 +387,11 @@
 
     ".config/zathura".source = ./configs/zathura;
 
-    
+    # Beatprints
+    ".config/BeatPrints".source = ./configs/Beatprints;
+
+    # Nix conf 
+    ".config/nix/nix.conf".source = ./configs/nix/nix.conf;
   };
 
 
@@ -370,23 +426,6 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  # Bash
-  programs.bash = {
-    enable = true;
-    shellAliases = {
-
- #     z = "zoxide";
-      rebuild = "sudo nixos-rebuild switch --flake /etc/nixos/#arroio";
-      explorer = "yazi";
-      fast = "fastfetch";
-      py = "python";
-      pip2nix = "nix run github:nix-community/pip2nix";
-
-    };
-
-  };
-
 }
 
 

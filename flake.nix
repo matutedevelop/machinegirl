@@ -6,15 +6,19 @@
 
     hyperland.url = "github:hyprwm/Hyprland";
 
-    plugin-lazy-nix-helper.url = "github:b-src/lazy-nix-helper.nvim";
-    plugin-lazy-nix-helper.flake = false;
-
-
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Spicetify
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+
+
+    # Zen
+    zen-browser.url = "github:youwen5/zen-browser-flake/5f8f1af9d29c59175e95937f14e0c4ba6418f2cb";
+
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {

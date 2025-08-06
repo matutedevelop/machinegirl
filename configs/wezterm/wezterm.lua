@@ -34,13 +34,13 @@ config.cell_width = 0.9
 -- config.font = wezterm.font("Iosevka")
 -- config.font = wezterm.font("M+ 1m") config.font = wezterm.font("Hack Regular")
 -- config.cell_width = 0.9
-config.window_background_opacity = 0.9
+config.window_background_opacity = 1
 config.prefer_egl = true
 config.font_size = 18.0
 
 config.window_padding = {
-	left = 0,
-	right = 0,
+	left = 5,
+	right = 5,
 	top = 0,
 	bottom = 0,
 }

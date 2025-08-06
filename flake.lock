@@ -382,19 +382,19 @@
         "type": "github"
       }
     },
-    "plugin-lazy-nix-helper": {
-      "flake": false,
+    "nixpkgs_3": {
       "locked": {
-        "lastModified": 1742356601,
-        "narHash": "sha256-4DyuBMp83vM344YabL2SklQCg6xD7xGF5CvQP2q+W7A=",
-        "owner": "b-src",
-        "repo": "lazy-nix-helper.nvim",
-        "rev": "22d0f4d737104cba6c18ba9ca3ff1db5160c67b5",
+        "lastModified": 1751984180,
+        "narHash": "sha256-LwWRsENAZJKUdD3SpLluwDmdXY9F45ZEgCb0X+xgOL0=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "9807714d6944a957c2e036f84b0ff8caf9930bc0",
         "type": "github"
       },
       "original": {
-        "owner": "b-src",
-        "repo": "lazy-nix-helper.nvim",
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -426,7 +426,27 @@
         "home-manager": "home-manager",
         "hyperland": "hyperland",
         "nixpkgs": "nixpkgs_2",
-        "plugin-lazy-nix-helper": "plugin-lazy-nix-helper"
+        "spicetify-nix": "spicetify-nix",
+        "zen-browser": "zen-browser"
+      }
+    },
+    "spicetify-nix": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3",
+        "systems": "systems_2"
+      },
+      "locked": {
+        "lastModified": 1752381641,
+        "narHash": "sha256-R2iDZb94RosuCeuIukacZVVXxzWYr4jn/QI/ax15nW8=",
+        "owner": "Gerg-L",
+        "repo": "spicetify-nix",
+        "rev": "8f9fd947c52aa6adb6bafe72516eccf186708954",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Gerg-L",
+        "repo": "spicetify-nix",
+        "type": "github"
       }
     },
     "systems": {
@@ -441,6 +461,21 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default-linux",
+        "type": "github"
+      }
+    },
+    "systems_2": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
         "type": "github"
       }
     },
@@ -482,6 +517,27 @@
       "original": {
         "owner": "hyprwm",
         "repo": "xdg-desktop-portal-hyprland",
+        "type": "github"
+      }
+    },
+    "zen-browser": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1753680138,
+        "narHash": "sha256-mTg6+gsZGyL24D7eHemX8pZJ+RyqL9JmoJ941nbEZZQ=",
+        "owner": "youwen5",
+        "repo": "zen-browser-flake",
+        "rev": "5f8f1af9d29c59175e95937f14e0c4ba6418f2cb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "youwen5",
+        "repo": "zen-browser-flake",
+        "rev": "5f8f1af9d29c59175e95937f14e0c4ba6418f2cb",
         "type": "github"
       }
     }

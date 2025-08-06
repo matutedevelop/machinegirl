@@ -17,20 +17,6 @@
 #                ||----w |
 #                ||     ||
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   wayland.windowManager.hyprland = {
     enable = true;
 
@@ -59,15 +45,22 @@
 
       
 
-     "border_size" = "1";
+     "border_size" = "3";
 
        "gaps_in" = "10";
 
        "gaps_out" = "40";
 
-       "gaps_workspaces" = "5";
+       "gaps_workspaces" = "3";
 
        "resize_on_border" = "true";
+
+       #"col.inactive_border" = "rgba(0,0,0,75) rgba(123,135,135,90) 60deg";
+       "col.inactive_border" = "rgb(0,0,0) rgb(11,11,30) 120deg";
+
+
+       "col.active_border" = "rgb(92,22,8) rgb(0,0,0) 120deg";
+
 	 };
      
 
@@ -106,6 +99,11 @@
     };
 
 
+    windowrule = [
+        "opacity 0.9 0.5, class:^(discord)$"
+        "opacity 0.7 0.5, class:^(spotify)$"
+        "opacity 0.7 0.5, class:^(wezterm)$"
+    ];
 
 
       bind =
@@ -160,8 +158,6 @@
 
 
 	]
-
-	
         ++ (
           builtins.concatLists (builtins.genList (i:
             let
