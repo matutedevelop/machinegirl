@@ -47,6 +47,16 @@
       bind -r J resize-pane -D 5
       bind -r K resize-pane -U 5
       bind -r L resize-pane -R 5
+
+          # Toggle terminal inferior con Ctrl-j
+      bind -n C-j run-shell '
+          if tmux list-panes -F "#{pane_title}" | grep -q "term-toggle"; then
+            tmux kill-pane -t ":term-toggle"
+          else
+            tmux split-window -v -p 20 -c "#{pane_current_path}" bash
+            tmux select-pane -T "term-toggle"
+          fi
+
     '';
   };
 

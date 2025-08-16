@@ -1,5 +1,9 @@
 {config, pkgs, inputs,... }:
 
+let
+  scripts = import ./configs/scripts/scripts.nix  { inherit pkgs; };
+in 
+
 {
    imports =[
 	./configs/hypr/hypr.nix
@@ -16,8 +20,8 @@
 
   enable = true;
   theme = {
-    package = pkgs.gruvbox-gtk-theme;
-    name = "Gruvbox-Dark";
+    package = pkgs.gruvbox-dark-gtk;
+    name = "gruvbox-dark";
     };
   font = {
     name = "IosevkaTerm Nerd Font";
@@ -61,6 +65,10 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
+
+
+
+
   home.packages = with pkgs; [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
@@ -85,18 +93,18 @@
     
     #Dev
     home-manager
-    git
     neo-cowsay
     pokemon-colorscripts-mac
-    #neovim
     kitty
     yazi-unwrapped
-    # zoxide
-    # lunarvim
     n8n
     fzf
     bat
     ripgrep
+
+
+    #Cloud
+    google-cloud-sdk-gce
     
     # zen
     inputs.zen-browser.packages.${pkgs.system}.default
@@ -121,17 +129,16 @@
     waybar
     rofi-wayland
     swaynotificationcenter
-    # pywal
     neofetch
     fastfetch
     smassh
     nemo-with-extensions
     waypaper
     beatprints
-    # spotify
-    # spicetify-cli
     cava
     discord
+
+    # Wallpaper choser
 
 
     # Utilities
@@ -144,6 +151,11 @@
     tint
     # dotool
     wlrctl
+    pulseaudioFull
+    playerctl
+    pamixer
+    scripts.rofi-audio
+    scripts.set-wallpaper
 
 
     #Knowledge
@@ -208,6 +220,13 @@
     rustfmt
     cargo
     clippy
+
+
+    # Go
+    go
+    gopls
+    golangci-lint
+    delve
   ];
 
 
@@ -255,6 +274,27 @@
     userEmail = "juan.arroyo@iteso.mx";
   };
 
+    programs.starship = { enable = true;
+    enableBashIntegration = true;
+  settings = {
+    add_newline = false;
+    command_timeout = 1300;
+    scan_timeout = 50;
+
+    format = "$username$directory$git_branch$git_commit$git_state$git_status$nix_shell$python$rust$go$java$docker$character";
+
+
+    character = {
+      success_symbol = "Γ";
+      error_symbol = "[✗](bold red) ";
+    };
+
+    fill = {
+    symbol = " ";
+    };
+  };
+};
+    
 
   programs.zoxide = {
   enable = true;
@@ -392,6 +432,16 @@
 
     # Nix conf 
     ".config/nix/nix.conf".source = ./configs/nix/nix.conf;
+
+    # Hyprlock
+    ".config/hypr/hyprlock.conf".source = ./configs/hypr/hyprlock.conf;
+
+    # rofi theme
+    ".config/rofi/themes/wal.rasi".source = ./configs/rofi/wal.rasi;
+
+    
+
+
   };
 
 

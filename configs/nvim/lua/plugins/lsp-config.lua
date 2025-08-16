@@ -135,23 +135,6 @@ return {
 			},
 		})
 
-		--		lspconfig.pylsp.setup({
-		--			on_attach = on_attach,
-		--			capabilities = capabilities,
-		--			settings = {
-		--				pylsp = {
-		--					plugins = {
-		--						-- Deshabilita Black e Isort de pylsp si Ruff o none-ls los manejan
-		--						black = { enabled = false }, -- Ruff también formatea
-		--						isort = { enabled = false }, -- Ruff también ordena imports
-		--						-- Puedes dejar otros linters aquí si los quieres DE pylsp,
-		--						-- por ejemplo si tienes 'flake8' o 'pylint' y quieres usarlos con pylsp
-		--						-- flake8 = { enabled = true },
-		--						-- pylint = { enabled = true },
-		--					},
-		--				},
-		--			},
-		--		})
 		--
 		--Para Lua (lua-language-server)
 		lspconfig.lua_ls.setup({
@@ -164,6 +147,18 @@ return {
 					diagnostics = {
 						globals = { "vim" },
 					},
+				},
+			},
+		})
+
+		lspconfig.gopls.setup({
+			capabilities = capabilities,
+			settings = {
+				gopls = {
+					analyses = {
+						unusedparams = true,
+					},
+					staticcheck = true,
 				},
 			},
 		})

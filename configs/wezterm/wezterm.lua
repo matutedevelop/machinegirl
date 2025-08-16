@@ -39,10 +39,10 @@ config.prefer_egl = true
 config.font_size = 18.0
 
 config.window_padding = {
-	left = 5,
-	right = 5,
-	top = 0,
-	bottom = 0,
+	left = 10,
+	right = 10,
+	top = 20,
+	bottom = 20,
 }
 
 -- tabs
@@ -59,23 +59,9 @@ config.use_fancy_tab_bar = false
 --
 
 -- color scheme toggling
-wezterm.on("toggle-colorscheme", function(window, pane)
-	local overrides = window:get_config_overrides() or {}
-	if overrides.color_scheme == "Zenburn" then
-		overrides.color_scheme = "Cloud (terminal.sexy)"
-	else
-		overrides.color_scheme = "Zenburn"
-	end
-	window:set_config_overrides(overrides)
-end)
 
 -- keymaps
 config.keys = {
-	{
-		key = "E",
-		mods = "CTRL|SHIFT|ALT",
-		action = wezterm.action.EmitEvent("toggle-colorscheme"),
-	},
 	{
 		key = "h",
 		mods = "CTRL|SHIFT|ALT",

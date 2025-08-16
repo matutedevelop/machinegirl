@@ -1,6 +1,5 @@
 
 {config, pkgs, ... }:
-
 {
 
 #  <==><==><==> <==><==><==><==><==><==><==><==><==><==><==><==> <==><==><==> 
@@ -16,22 +15,19 @@
 #            (__)\       )\/\
 #                ||----w |
 #                ||     ||
-
   wayland.windowManager.hyprland = {
     enable = true;
 
     settings = {
       "$mod" = "SUPER";
 
+
+
       exec-once = [
         "swaync"
         "waybar"
-
-    # Fondo de pantalla === === === === === === === === ===
-    "hyprpaper"
-    "sleep 0.5 && hyprctl hyprpaper preload /home/arroio/Pictures/fondo_nuevo.png"
-    "sleep 1 && hyprctl hyprpaper wallpaper ,/home/arroio/Pictures/fondo_nuevo.png"
-    "wal -i ~/Pictures/fondo_nuevo.png"
+        "hyprpaper"
+        "set-wallpaper"
       ];
 
       # Monitor config
@@ -47,9 +43,9 @@
 
      "border_size" = "3";
 
-       "gaps_in" = "10";
+       "gaps_in" = "30";
 
-       "gaps_out" = "40";
+       "gaps_out" = "80";
 
        "gaps_workspaces" = "3";
 
@@ -83,7 +79,7 @@
         
     blur = {
 
-        "size" = "12";
+        "size" = "7";
 
         "passes" = "2";
 
@@ -98,23 +94,44 @@
 
     };
 
+ animations = {
+    enabled = "yes";
+
+    bezier = [
+      "smooth, 0.25, 0.1, 0.25, 1.0"
+      "springy, 0.05, 0.7, 0.1, 1.0"
+    ];
+
+    animation = [
+      "windows, 1, 3, smooth, slide"
+      "border, 1, 3, smooth"
+      "fade, 1, 5, smooth"
+      "workspaces, 1, 4, springy, slidevert"
+    ];
+  };
 
     windowrule = [
         "opacity 0.9 0.5, class:^(discord)$"
         "opacity 0.7 0.5, class:^(spotify)$"
-        "opacity 0.7 0.5, class:^(wezterm)$"
+        "opacity 0.6 0.5, class:^(wezterm)$"
     ];
 
 
       bind =
         [
-          "$mod,F, exec, firefox"
+          "$mod,F, exec, zen"
+          "$mod SHIFT,M, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle"
+          "$mod,T, exec, wezterm"
           "$mod SHIFT,S, exec, hyprshot -m region"
           "ALT, SPACE, exec, rofi -show drun"
           "$mod,Q, killactive"
 	  "ALT, Tab, exec, rofi -show window"
           "$mod SHIFT,E, exec, rofi -show filebrowser"  
           "$mod,E, exec,  nemo"  
+          "$mod,M, exec, rofi-audio"
+          "$mod,left, exec, playerctl previous"
+          "$mod,right, exec, playerctl next"
+          "$mod,up, exec, playerctl play-pause"
 
           # Dispatchers === === === === === === ===
 
@@ -125,6 +142,17 @@
             "SHIFT, K, movefocus, u"
             "SHIFT, L, movefocus, r"
 
+
+
+
+            
+            # Mover ventanas <==> <==> <==> <==> <==>
+
+
+           "$mod CTRL, h, resizeactive, -50 0"
+           "$mod CTRL, l, resizeactive, 50 0"
+           "$mod CTRL, k, resizeactive, 0 -50"
+           "$mod CTRL, j, resizeactive, 0 50"
 
 
             # Mover ventanas <==> <==> <==> <==> <==>

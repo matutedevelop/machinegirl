@@ -1,102 +1,361 @@
-* {
-    font: "IosevkaTerm Nerd Font 14";
-
-    g-spacing: 10px;
-    g-margin: 0;
-    b-color: #000000FF;
-    fg-color: #FFFFFFFF;
-    fgp-color: #888888FF;
-    b-radius: 8px;
-    g-padding: 8px;
-    hl-color: #FFFFFFFF;
-    hlt-color: #000000FF;
-    alt-color: #111111FF;
-    wbg-color: #000000CC;
-    w-border: 2px solid;
-    w-border-color: #FFFFFFFF;
-    w-padding: 12px;
-}
-
+// vim: fdm=marker
 configuration {
-    modi: "drun";
-    show-icons: true;
-    display-drun: "";
+  modes: "window,drun,run,ssh";
+  font: "JetBrainsMono NF 18";
+  drun-display-format: "{name}";
 }
 
-listview {
-    columns: 1;
-    lines: 7;
-    fixed-height: true;
-    fixed-columns: true;
-    cycle: false;
-    scrollbar: false;
-    border: 0px solid;
+* {
+  // general
+  bg: #282828;
+  bgt: #28282895;
+  t: transparent;
+  fg: #d4be98;
+
+  selected-bg: @fg;
+  selected-fg: @bg;
+
+  // for windows
+  active: #a9b665;
+  urgent: #fb4934;
 }
 
 window {
-    transparency: "real";
-    width: 450px;
-    border-radius: @b-radius;
-    background-color: @wbg-color;
-    border: @w-border;
-    border-color: @w-border-color;
-    padding: @w-padding;
+  fullscreen: true;
+  padding: 35% 30%;       // you might want to ajust these to resize rofi.
+  transparency: "real";
+  background-color: @bgt;
+  border-color: @t;
 }
 
-prompt {
-    text-color: @fg-color;
+listview {
+  border: 0 0 0 0;
+  padding: 23 0 0;
+  scrollbar: true;
 }
 
-inputbar {
-    children: ["prompt", "entry"];
-    spacing: @g-spacing;
+scrollbar {
+    width:        4px;
+    border:       0;
+    handle-color: @fg;
+    handle-width: 8px;
+    padding:      0 5;
 }
 
 entry {
-    placeholder: "Search Apps";
-    text-color: @fg-color;
-    placeholder-color: @fgp-color;
+    placeholder: "";
 }
 
-mainbox {
-    spacing: @g-spacing;
-    margin: @g-margin;
-    padding: @g-padding;
-    children: ["inputbar", "listview", "message"];
+// less interesting stuff {{{
+
+// using elements from:
+// https://github.com/bardisty/gruvbox-rofi/blob/master/gruvbox-common.rasi
+
+textbox {
+    text-color: @fg;
 }
 
 element {
-    spacing: @g-spacing;
-    margin: @g-margin;
-    padding: @g-padding;
-    border: 0px solid;
-    border-radius: @b-radius;
-    border-color: @b-color;
-    background-color: transparent;
-    text-color: @fg-color;
+    border:  0;
+    padding: 2px;
+}
+element.normal.normal {
+    background-color: @t;
+    text-color:       @fg;
+}
+element.normal.urgent {
+    background-color: @t;
+    text-color:       @urgent;
+}
+element.normal.active {
+    background-color: @t;
+    text-color:       @active;
+}
+element.selected.normal {
+    background-color: @selected-bg;
+    text-color:       @selected-fg;
+}
+element.selected.urgent {
+    background-color: @selected-bg;
+    text-color:       @urgent;
+}
+element.selected.active {
+    background-color: @selected-bg;
+    text-color:       @selected-fg;
+}
+element.alternate.normal {
+    background-color: @t;
+    text-color:       @fg;
+}
+element.alternate.urgent {
+    background-color: @t;
+    text-color:       @urgent;
+}
+element.alternate.active {
+    background-color: @t;
+    text-color:       @active;
 }
 
-element normal.normal {
-	background-color: transparent;
-	text-color: @fg-color;
+sidebar {
+    border:       2px 0 0;
+    border-color: @fg;
 }
 
-element alternate.normal {
-	background-color: @alt-color;
-	text-color: @fg-color;
+inputbar {
+    spacing:    0;
+    text-color: @fg;
+    padding:    2px;
+    children:   [ prompt, textbox-prompt-sep, entry, case-indicator ];
 }
 
-element selected.active {
-	background-color: @hl-color;
-	text-color: @hlt-color;
+case-indicator,
+entry,
+prompt,
+button {
+    spacing:    0;
+    text-color: @fg;
 }
 
-element selected.normal {
-	background-color: @hl-color;
-	text-color: @hlt-color;
+button.selected {
+    background-color: @bg;
+    text-color:       @fg;
 }
 
-message {
-    background-color: "#6b3639";
-    border: 0px solid;
+textbox-prompt-sep {
+    expand:     false;
+    str:        ":";
+    text-color: @fg;
+    margin:     0 0.3em 0 0;
 }
+// }}}
+
+
+
+
+
+
+
+
+// @theme "wal"
+// 
+// * {
+//     font: "IosevkaTerm Nerd Font 14";
+// 
+//     g-spacing: 10px;
+//     g-margin: 0;
+//     b-color: @normal-background;
+//     fg-color: @normal-foreground;
+//     fgp-color: @urgent-background;
+//     b-radius: 8px;
+//     g-padding: 8px;
+//     hl-color: @selected-normal-background;
+//     hlt-color: @selected-normal-foreground;
+//     alt-color: @alternate-normal-background;
+//     wbg-color: @normal-background;
+//     w-border: 2px solid;
+//     w-border-color: @urgent-background;
+//     w-padding: 12px;
+// }
+// 
+// configuration {
+//     modi: "drun";
+//     show-icons: true;
+//     display-drun: "";
+// }
+// 
+// listview {
+//     columns: 1;
+//     lines: 7;
+//     fixed-height: true;
+//     fixed-columns: true;
+//     cycle: false;
+//     scrollbar: false;
+//     border: 0px solid;
+// }
+// 
+// window {
+//     transparency: "real";
+//     width: 450px;
+//     border-radius: @b-radius;
+//     background-color: @wbg-color;
+//     border: @w-border;
+//     border-color: @w-border-color;
+//     padding: @w-padding;
+// }
+// 
+// prompt {
+//     text-color: @fg-color;
+// }
+// 
+// inputbar {
+//     children: ["prompt", "entry"];
+//     spacing: @g-spacing;
+// }
+// 
+// entry {
+//     placeholder: "Search Apps";
+//     text-color: @fg-color;
+//     placeholder-color: @fgp-color;
+// }
+// 
+// mainbox {
+//     spacing: @g-spacing;
+//     margin: @g-margin;
+//     padding: @g-padding;
+//     children: ["inputbar", "listview", "message"];
+// }
+// 
+// element {
+//     spacing: @g-spacing;
+//     margin: @g-margin;
+//     padding: @g-padding;
+//     border: 0px solid;
+//     border-radius: @b-radius;
+//     border-color: @b-color;
+//     background-color: transparent;
+//     text-color: @fg-color;
+// }
+// 
+// element normal.normal {
+//     background-color: transparent;
+//     text-color: @fg-color;
+// }
+// 
+// element alternate.normal {
+//     background-color: @alt-color;
+//     text-color: @fg-color;
+// }
+// 
+// element selected.active {
+//     background-color: @hl-color;
+//     text-color: @hlt-color;
+// }
+// 
+// element selected.normal {
+//     background-color: @hl-color;
+//     text-color: @hlt-color;
+// }
+// 
+// message {
+//     background-color: @selected-urgent-background;
+//     border: 0px solid;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// configuration {
+//     modi: "run,drun";
+//     lines: 6;
+//     font: "JetBrainsMono Nerd Font 14";
+//     show-icons: true;
+//     icon-theme: "Oranchelo";
+//     terminal: "st";
+//     drun-display-format: "{icon} {name}";
+//     location: 0;
+//     disable-history: false;
+//     hide-scrollbar: true;
+//     display-drun: "   Apps ";
+//     display-run: "   Run ";
+//     display-window: " 﩯  window";
+//     display-Network: " 󰤨  Network";
+//     sidebar-mode: true;
+// }
+// 
+// element-text, element-icon, mode-switcher {
+//     background-color: inherit;
+//     text-color: inherit;
+// }
+// 
+// window {
+//     height: 360px;
+//     border: 3px;
+//     border-color: @selected-urgent-background;
+//     background-color: @normal-background;
+// }
+// 
+// mainbox {
+//     background-color: @normal-background;
+// }
+// 
+// inputbar {
+//     children: [prompt, entry];
+//     background-color: @normal-background;
+//     border-radius: 6px;
+//     padding: 4px;
+// }
+// 
+// prompt {
+//     background-color: @active-background;
+//     padding: 6px 10px;
+//     text-color: @active-foreground;
+//     border-radius: 4px;
+//     margin: 0px 8px 0px 0px;
+// }
+// 
+// textbox-prompt-colon {
+//     expand: false;
+//     str: ":";
+// }
+// 
+// entry {
+//     padding: 6px 10px;
+//     margin: 0;
+//     text-color: @normal-foreground;
+//     background-color: @normal-background;
+//     placeholder: "Search";
+//     border-radius: 4px;
+// }
+// 
+// listview {
+//     border: 0;
+//     padding: 8px;
+//     margin: 10px 0px 0px 0px;
+//     columns: 2;
+//     background-color: @normal-background;
+// }
+// 
+// element {
+//     padding: 5px 8px;
+//     background-color: @normal-background;
+//     text-color: @normal-foreground;
+//     border-radius: 4px;
+// }
+// 
+// element-icon {
+//     size: 25px;
+// }
+// 
+// element selected {
+//     background-color: @selected-normal-background;
+//     text-color: @selected-normal-foreground;
+// }
+// 
+// mode-switcher {
+//     spacing: 0;
+// }
+// 
+// button {
+//     padding: 8px;
+//     background-color: @alternate-normal-background;
+//     text-color: @normal-foreground;
+//     vertical-align: 0.5;
+//     horizontal-align: 0.5;
+//     border-radius: 4px;
+// }
+// 
+// button selected {
+//     background-color: @selected-active-background;
+//     text-color: @selected-active-foreground;
+// }
+// 
