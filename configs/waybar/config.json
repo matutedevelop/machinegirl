@@ -1,0 +1,95 @@
+
+
+
+{
+"layer": "top",
+"modules-left": ["custom/launcher","cpu","memory","custom/media","tray"],
+"modules-center": ["hyprland/workspaces"],
+"modules-right": ["custom/updates","network","custom/wallpaper","pulseaudio","clock", "battery","custom/power"],
+// "modules-right": ["custom/updates","network","custom/wallpaper","pulseaudio","clock","custom/power"],
+
+"pulseaudio": {
+"tooltip": false,
+"scroll-step": 5,
+"format": "{icon} ",
+"format-muted": "{icon} {volume}%",
+"on-click":"rofi-audio",
+"format-icons": {
+"default": ["", "", ""]
+}
+},
+
+"hyprland/workspaces": {
+"persistent-workspaces": {
+    "*": [1,2,3]          }
+
+},     
+
+
+
+"network": {
+"tooltip": false,
+"format-wifi": "  {essid}",
+"format-ethernet": "",
+"on-click":"wezterm start --always-new-process -- bash -c 'nmtui'"
+},
+"battery": {
+"states": {
+"good": 95,
+"warning": 30,
+"critical": 20
+},
+"format": "{icon}  {capacity}%",
+"format-charging": " {capacity}%",
+"format-plugged": " {capacity}%",
+"format-alt": "{time} {icon}",
+"format-icons": ["", "", "", "", ""]
+},
+"tray":{
+"icon-size":18,
+"spacing": 10
+},
+"clock": {
+//"format": "{: %I:%M :%p  : :%d/%m/%Y} ",
+"format": "{:%I:%M %p  %d/%m/%Y}",
+"interval":1
+},
+"cpu": {
+"interval": 15,
+"format": " {}%",
+"max-length": 10
+},
+"memory": {
+"interval": 30,
+"format": " {}%",
+"max-length": 10
+},
+"custom/media": {
+"interval": 30,
+"format": "{icon} {}",
+"return-type": "json",
+"max-length": 20,
+"format-icons": {
+"spotify": " ",
+"default": " "
+
+},
+"escape": true,
+"exec": "$HOME/.config/system_scripts/mediaplayer.py 2> /dev/null",
+"on-click": "playerctl play-pause"
+},
+"custom/launcher":{
+"format": " ",
+"on-click": "rofi -show drun",
+"on-click-right": "killall rofi"
+},
+"custom/power":{
+"format": " ",
+"on-click": "rofi -show power-menu -modi power-menu:rofi-power-menu",
+},
+"custom/wallpaper":{
+"format":" ",
+"on-click": "set-wallpaper"
+}
+}
+
