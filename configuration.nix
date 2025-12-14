@@ -20,6 +20,17 @@ programs.hyprland.package = inputs.hyperland.packages.${pkgs.system}.hyprland;
 
 
 
+# greetd
+services.greetd.enable = true;
+services.greetd.settings = {
+  default_session = {
+    command = "Hyprland";
+    user = "arroio";
+  };
+};
+
+
+
 
 
   # PipeWire

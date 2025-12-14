@@ -20,8 +20,8 @@ in
 
     enable = true;
     theme = {
-      package = pkgs.gruvbox-dark-gtk;
-      name = "gruvbox-dark";
+      package = pkgs.whitesur-gtk-theme;
+      name = "WhiteSur-Dark";
     };
     font = {
       name = "IosevkaTerm Nerd Font";
@@ -29,10 +29,16 @@ in
     };
 
     iconTheme = {
-      package = pkgs.tela-circle-icon-theme;
-      name = "Tela-red-dark"; # A menudo el tema de iconos tiene el mismo nombre
+      package = pkgs.whitesur-icon-theme;
+      name = "WhiteSur";
 
     };
+    cursorTheme = {
+      name = "Bibata-Modern-Ice";
+      package = pkgs.bibata-cursors;
+      size = 24;
+    };
+
 
   };
 
@@ -107,6 +113,7 @@ in
       n8n
       fzf
       bat
+      wget
       ripgrep
       btop
 
@@ -137,20 +144,19 @@ in
 
       # Desktop
       waybar
-      rofi-wayland
+      rofi
       swaynotificationcenter
       neofetch
       fastfetch
       nemo-with-extensions
       waypaper
-      beatprints
       cava
       cavalier
       discord
       # spotify
       vlc
       lenovo-legion
-      openrgb
+      openrgb-with-all-plugins
 
       # Wallpaper choser
 
@@ -225,7 +231,7 @@ in
         kneed
         umap-learn
         statsmodels
-        pytorch
+        torch
         yfinance
         jax
         numba
@@ -372,7 +378,7 @@ in
 
 
       character = {
-        success_symbol = "Γ";
+        success_symbol = "λ";
         error_symbol = "[✗](bold red) ";
       };
 
@@ -508,6 +514,7 @@ in
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+
     ".config/rofi/config.rasi".source = ./configs/rofi/config.rasi;
     ".config/waybar/config".source = ./configs/waybar/config.json;
     ".config/waybar/style.css".source = ./configs/waybar/style.css;
@@ -520,8 +527,6 @@ in
 
     ".config/zathura".source = ./configs/zathura;
 
-    # Beatprints
-    ".config/BeatPrints".source = ./configs/Beatprints;
 
     # Nix conf
     ".config/nix/nix.conf".source = ./configs/nix/nix.conf;
