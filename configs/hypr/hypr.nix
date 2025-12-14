@@ -32,6 +32,7 @@
         "waybar"
         "hyprpaper"
         "set-wallpaper"
+        "hypridle"
       ];
 
       # Monitor config

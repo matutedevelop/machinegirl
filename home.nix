@@ -176,6 +176,8 @@ in
       pamixer
       scripts.rofi-audio
       scripts.set-wallpaper
+      scripts.hyproled
+      scripts.hyproledo
       brightnessctl
       pdf2svg
       xclip
@@ -533,6 +535,10 @@ in
 
     # Hyprlock
     ".config/hypr/hyprlock.conf".source = ./configs/hypr/hyprlock.conf;
+    ".config/hypr/hypridle.conf".source = ./configs/hypr/hypridle.conf;
+
+    # hyproled
+    "Dev/tools/hyproled/hyproled".source = ./configs/scripts/hyproled;
 
     # Hyprpaper
     ".config/hypr/hyprpaper.conf".source = ./configs/hypr/hyprpaper.conf;
