@@ -106,7 +106,8 @@ in
 
       #Dev
       home-manager
-      neo-cowsay
+      pokemonsay
+      pokete
       pokemon-colorscripts-mac
       kitty
       yazi-unwrapped
@@ -144,19 +145,17 @@ in
 
       # Desktop
       waybar
+      eww
       rofi
       swaynotificationcenter
       neofetch
       fastfetch
       nemo-with-extensions
       waypaper
-      cava
       cavalier
-      discord
       # spotify
       vlc
       lenovo-legion
-      openrgb-with-all-plugins
 
       # Wallpaper choser
 
@@ -164,6 +163,7 @@ in
       # Utilities
 
       imagemagick
+      matugen
       pavucontrol
       swayimg
       rofi-file-browser
@@ -188,7 +188,6 @@ in
       zathura
       obsidian
       typst
-      # teams
       anki-bin
 
       # Haskell
@@ -198,6 +197,7 @@ in
 
       # python
       uv
+      maturin
       (python313.withPackages (ps: with ps; [
 
         # Jupyter
@@ -251,14 +251,12 @@ in
       ty
       jetbrains.pycharm-professional
       jetbrains.dataspell
-      jetbrains.idea-ultimate
-      jetbrains.jdk
+      jetbrains.datagrip
       scripts.notebook
       scripts.rmd
 
       # Productivity
       gimp3
-
       inkscape
 
       # C
@@ -303,24 +301,24 @@ in
           tidyr
         ];
       })
-      (rWrapper.override {
-        packages = with rPackages; [
-
-          rmarkdown
-          fastDummies
-          knitr
-          yaml
-          htmltools
-          dplyr
-          ggplot2
-          languageserver
-          readxl
-          moments
-          BSDA
-
-
-        ];
-      })
+      # (rWrapper.override {
+      #   packages = with rPackages; [
+      #
+      #     rmarkdown
+      #     fastDummies
+      #     knitr
+      #     yaml
+      #     htmltools
+      #     dplyr
+      #     ggplot2
+      #     languageserver
+      #     readxl
+      #     moments
+      #     BSDA
+      #
+      #
+      #   ];
+      # })
 
     ];
 
@@ -410,8 +408,7 @@ in
       pip2nixx = "nix run github:nix-community/pip2nix";
       walr = "cat /home/arroio/.cache/wal/sequences";
       fzz = ''nvim $(fzf -m --preview="bat --color=always {}")'';
-      javar = "javac -d ./bin";
-      brrillo = "brightnessctl s";
+      brillo = "brightnessctl s";
 
     };
   };
@@ -538,13 +535,17 @@ in
     ".config/hypr/hypridle.conf".source = ./configs/hypr/hypridle.conf;
 
     # hyproled
-    "Dev/tools/hyproled/hyproled".source = ./configs/scripts/hyproled;
+    "Dev/TOOLS/hyproled/hyproled".source = ./configs/scripts/hyproled;
 
     # Hyprpaper
     ".config/hypr/hyprpaper.conf".source = ./configs/hypr/hyprpaper.conf;
 
     # rofi theme
     ".config/rofi/themes/wal.rasi".source = ./configs/rofi/wal.rasi;
+
+
+    # fastfetch
+    ".config/fastfetch".source = ./configs/fastfetch;
 
 
 
@@ -578,7 +579,6 @@ in
 
 
   home.sessionVariables = {
-    # EDITOR = "emacs";
   };
 
   # Let Home Manager install and manage itself.

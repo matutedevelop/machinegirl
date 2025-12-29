@@ -68,6 +68,8 @@ boot.loader.efi.canTouchEfiVariables = true;
 boot.loader.efi.efiSysMountPoint = "/boot";
 
 boot.loader.systemd-boot.enable = false;
+boot.kernelPackages = pkgs.linuxPackages_latest;
+boot.loader.grub.configurationLimit = 5;
 
 
 
@@ -226,6 +228,7 @@ boot.loader.systemd-boot.enable = false;
      nerd-fonts.monoid
      nerd-fonts.fira-code
      nerd-fonts.victor-mono
+     nerd-fonts.blex-mono
   ];
 
 
@@ -246,6 +249,10 @@ boot.loader.systemd-boot.enable = false;
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
 
+
+boot.extraModprobeConfig = ''
+  options snd_hda_intel power_save=0
+'';
 
 
 

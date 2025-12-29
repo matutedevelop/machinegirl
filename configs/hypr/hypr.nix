@@ -33,6 +33,7 @@
         "hyprpaper"
         "set-wallpaper"
         "hypridle"
+        "hyprlock"
       ];
 
       # Monitor config
@@ -238,7 +239,9 @@
       "3,vertical,workspace"
       "4,left,dispatcher,exec, playerctl previous"
       "4,right,dispatcher,exec, playerctl next"
-      "4,up,fullscreen"
+      "4,up,dispatcher,exec, playerctl volume 0"
+      "3,left,dispatcher,exec, playerctl volume .2+"
+      "3,right,dispatcher,exec, playerctl volume .2-"
 
       ];
 

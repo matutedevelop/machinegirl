@@ -27,7 +27,7 @@
 
 #!/bin/bash
 
-cd /home/arroio/Dev/tools/hyproled
+cd /home/arroio/Dev/TOOLS/hyproled
 bash hyproled 
 
     '';
@@ -41,7 +41,7 @@ bash hyproled
 
 #!/bin/bash
 
-cd /home/arroio/Dev/tools/hyproled
+cd /home/arroio/Dev/TOOLS/hyproled
 bash hyproled off
 
     '';

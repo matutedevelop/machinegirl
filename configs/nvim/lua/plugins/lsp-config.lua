@@ -140,8 +140,9 @@ return {
         --     },
         -- }
 
-        lspconfig.ruff.setup({})
-        lspconfig.pyright.setup({
+        vim.lsp.enable("ruff")
+        vim.lsp.config("pyright", {
+
             settings = {
                 python = {
                     analysis = {
@@ -151,9 +152,11 @@ return {
             },
         })
 
+        vim.lsp.enable("pyright")
+
         --
         --Para Lua (lua-language-server)
-        lspconfig.lua_ls.setup({
+        vim.lsp.config("lua_ls", {
             capabilities = capabilities,
             settings = {
                 Lua = {
@@ -167,10 +170,13 @@ return {
             },
         })
 
-        lspconfig.tinymist.setup({})
+        vim.lsp.enable("lua_ls")
+
+        -- lspconfig.tinymist.setup({})
+        vim.lsp.enable("tinymist")
         -- lspconfig.haskell-language-server.setup({})
 
-        lspconfig.gopls.setup({
+        vim.lsp.config("gopls", {
             capabilities = capabilities,
             settings = {
                 gopls = {
@@ -182,7 +188,10 @@ return {
             },
         })
 
-        lspconfig.rust_analyzer.setup({
+        vim.lsp.enable("gopls")
+
+        -- lspconfig.rust_analyzer.setup()
+        vim.lsp.config("rust_analyzer", {
             capabilities = capabilities,
             settings = {
 
@@ -201,8 +210,12 @@ return {
             },
         })
 
+        vim.lsp.enable("rust_analyzer")
+
         -- Nix LSP (nil)
-        lspconfig.nil_ls.setup({
+        --lspconfig.nil_ls.setup()
+
+        vim.lsp.config("nil_ls", {
             capabilities = capabilities,
             settings = {
                 ["nil"] = {
@@ -213,16 +226,25 @@ return {
             },
         })
 
+        vim.lsp.enable("nil_ls")
+
         -- Typst (tinymist)
-        lspconfig.tinymist.setup({
+        -- lspconfig.tinymist.setup()
+        --
+
+        vim.lsp.config("tinymist", {
             capabilities = capabilities,
             settings = {
                 exportPdf = "onType", -- otras opciones: "onType",
             },
         })
 
+        vim.lsp.enable("tinymist")
+
         -- Haskell (hls)
-        lspconfig.hls.setup({
+        --lspconfig.hls.setup()
+        --
+        vim.lsp.config("hls", {
             capabilities = capabilities,
             settings = {
                 haskell = {
@@ -231,12 +253,17 @@ return {
                 },
             },
         })
+        vim.lsp.enable("hls")
 
-        lspconfig.jdtls.setup({
+        -- lspconfig.jdtls.setup()
+
+        vim.lsp.config("jdtls", {
             capabilities = capabilities,
             settings = {
                 java = {},
             },
         })
+
+        vim.lsp.enable("jdtls")
     end,
 }
