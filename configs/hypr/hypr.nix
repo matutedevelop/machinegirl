@@ -58,11 +58,11 @@
 
 
 
-        "border_size" = "3";
+        "border_size" = "0";
 
         "gaps_in" = "30";
 
-        "gaps_out" = "80";
+        "gaps_out" = "100";
 
         "gaps_workspaces" = "3";
 

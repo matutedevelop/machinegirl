@@ -20,8 +20,8 @@ in
 
     enable = true;
     theme = {
-      package = pkgs.whitesur-gtk-theme;
-      name = "WhiteSur-Dark";
+      package = pkgs.graphite-gtk-theme;
+      name = "Graphite-Dark";
     };
     font = {
       name = "IosevkaTerm Nerd Font";
@@ -99,7 +99,6 @@ in
       #   echo "Hello, ${config.home.username}!"
       # '')
       #dumb games
-      bastet
       bsdgames
       _2048-in-terminal
 
@@ -125,11 +124,13 @@ in
 
       # zen
       inputs.zen-browser.packages.${pkgs.system}.default
+      chromium
+      chromedriver
 
 
       # Java
       #jdk
-      jdt-language-server
+      #jdt-language-server
 
       # Hyperland requirements
 
@@ -145,9 +146,9 @@ in
 
       # Desktop
       waybar
-      eww
       rofi
       swaynotificationcenter
+      libnotify
       neofetch
       fastfetch
       nemo-with-extensions
@@ -157,30 +158,34 @@ in
       vlc
       lenovo-legion
 
-      # Wallpaper choser
 
 
       # Utilities
 
       imagemagick
-      matugen
+      hyprpicker
       pavucontrol
       swayimg
       rofi-file-browser
       rofi-power-menu
+      rofi-calc
+      rofi-bluetooth
+      rofi-network-manager
       tint
+      pandoc
       # dotool
       wlrctl
       pulseaudioFull
       playerctl
       pamixer
-      scripts.rofi-audio
-      scripts.set-wallpaper
-      scripts.hyproled
-      scripts.hyproledo
       brightnessctl
       pdf2svg
       xclip
+      scripts.rofiAudio
+      scripts.setWallpaper
+      scripts.hyproled
+      scripts.hyproledo
+      scripts.batteryNotify
 
 
       #Knowledge
@@ -189,6 +194,7 @@ in
       obsidian
       typst
       anki-bin
+      sherlock
 
       # Haskell
       haskell-ci
@@ -247,13 +253,14 @@ in
         flet
         flet-web
         flet-desktop
+        selenium
+        webdriver-manager
       ]))
       ty
       jetbrains.pycharm-professional
       jetbrains.dataspell
       jetbrains.datagrip
       scripts.notebook
-      scripts.rmd
 
       # Productivity
       gimp3
@@ -451,6 +458,8 @@ in
       ty
       pyright
 
+      ripgrep
+
 
       # Lua
       lua-language-server
@@ -515,8 +524,7 @@ in
     # '';
 
     ".config/rofi/config.rasi".source = ./configs/rofi/config.rasi;
-    ".config/waybar/config".source = ./configs/waybar/config.json;
-    ".config/waybar/style.css".source = ./configs/waybar/style.css;
+    ".config/waybar".source = ./configs/waybar;
 
     # neovim config
 
@@ -535,7 +543,7 @@ in
     ".config/hypr/hypridle.conf".source = ./configs/hypr/hypridle.conf;
 
     # hyproled
-    "Dev/TOOLS/hyproled/hyproled".source = ./configs/scripts/hyproled;
+    "Dev/TOOLS/hyproled/hyproled".source = ./configs/scripts/nixint/hyproled;
 
     # Hyprpaper
     ".config/hypr/hyprpaper.conf".source = ./configs/hypr/hyprpaper.conf;
@@ -576,10 +584,47 @@ in
   #
 
 
+  home.sessionVariables = { };
 
 
-  home.sessionVariables = {
+# === === === === === === === === === === ===
+# === === === === === === === === === === ===
+# === === === === === === === === === === ===
+
+  #systemd 
+  systemd.user.services.battery-notify = {
+
+    Unit = {
+      Description = "Battery notification";
+    };
+
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${scripts.batteryNotify}/bin/battery-notify";
+    };
+
   };
+
+
+  systemd.user.timers.battery-notify = {
+    Unit = {
+      Description = "Run battery-notify periodically";
+    };
+
+    Timer = {
+      OnBootSec = "2m";
+      OnUnitActiveSec = "2m";
+    };
+
+    Install = {
+      WantedBy = [ "timers.target" ];
+    };
+  };
+
+# === === === === === === === === === === ===
+# === === === === === === === === === === ===
+# === === === === === === === === === === ===
+
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

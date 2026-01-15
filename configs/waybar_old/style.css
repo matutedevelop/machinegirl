@@ -1,0 +1,347 @@
+/*@import url('../../.cache/wal/colors-waybar.css');
+
+* {
+	border: none;
+	border-radius: 10px;
+	font-family: "JetbrainsMono Nerd Font"; 
+	font-size: 15px;
+	min-height: 10px;
+}
+
+window#waybar {
+	background: transparent;
+}
+
+window#waybar.hidden {
+	opacity: 0.2;
+}
+
+#window {
+	margin-top: 6px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 10px;
+	transition: none;
+	color: transparent;
+	background: transparent;
+}
+
+#workspaces {
+	margin-top: 6px;
+	margin-left: 12px;
+	font-size: 16px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	background: @background;
+	transition: none;
+	padding: 0px 5px;
+}
+
+#workspaces button {
+	transition: none;
+	color: @color6;
+	background: transparent;
+	font-size: 16px;
+	border-radius: 5px;
+	padding: 2px 8px;
+	margin: 2px;
+	min-width: 20px;
+}
+
+#workspaces button.empty {
+	transition: none;
+	color: @color6;
+	background: transparent;
+	font-size: 8px;
+}
+
+#workspaces button.occupied {
+	transition: none;
+	color: @color1;
+	background: transparent;
+	font-size: 14px;
+}
+
+#workspaces button.active {
+	color: @color2;
+	background: rgba(255, 255, 255, 0.1);
+	border: 2px solid @color2;
+}
+
+#workspaces button:hover {
+	transition: none;
+	box-shadow: inherit;
+	text-shadow: inherit;
+	color: @color3;
+	background: rgba(255, 255, 255, 0.05);
+	border-color: @color5;
+}
+
+#workspaces button.active:hover {
+	color: @color5;
+	border-color: @color5;
+}
+
+#network {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: @background;
+	background: @color4;
+}
+
+#pulseaudio {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: @color0;
+	background: @color3;
+}
+
+#battery {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: @background;
+	background: @color6;
+}
+
+#battery.charging,
+#battery.plugged {
+	color: @background;
+	background-color: @color6;
+}
+
+#battery.critical:not(.charging) {
+	background-color: @color6;
+	color: @background;
+	animation-name: blink;
+	animation-duration: 0.5s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+
+@keyframes blink {
+	to {
+		background-color: @color1;
+		color: @color6;
+	}
+}
+
+#backlight {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: @background;
+	background: @color5;
+}
+
+#clock {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: @background;
+	background: @color2;
+}
+
+#memory {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	margin-bottom: 0px;
+	padding-right: 10px;
+	border-radius: 10px;
+	transition: none;
+	color: @background;
+	background: @color5;
+}
+
+#cpu {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	margin-bottom: 0px;
+	padding-right: 10px;
+	border-radius: 10px;
+	transition: none;
+	color: @background;
+	background: @color4;
+}
+
+#tray {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	margin-bottom: 0px;
+	padding-right: 10px;
+	border-radius: 10px;
+	transition: none;
+	color: @color6;
+	background: @background;
+}
+
+#custom-launcher {
+	font-size: 24px;
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 5px;
+	border-radius: 10px;
+	transition: none;
+	color: @color6;
+	background: @background;
+}
+
+#custom-power {
+	font-size: 20px;
+	margin-top: 6px;
+	margin-left: 8px;
+	margin-right: 8px;
+	padding-left: 10px;
+	padding-right: 5px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: @background;
+	background: @color1;
+}
+
+#custom-wallpaper {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: @background;
+	background: @color4;
+}
+
+#custom-updates {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: @background;
+	background: @color5;
+}
+
+#custom-media {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: @background;
+	background: @color6;
+} */
+
+@import url('../../.cache/wal/colors-waybar.css');
+
+* {
+    all: unset;
+    font-weight: 500;
+    font-family: 'FiraCode';
+}
+
+#waybar {
+    font-size: 16px;
+}
+
+#workspaces,
+#pulseaudio,
+#pulseaudio-slider,
+#custom-theme-switcher,
+#clock {
+    padding: 2px 15px;
+    color: @foreground;
+    background: @background;
+    border-radius: 8px;
+    border: solid 1px @color3;
+    opacity: 0.8;
+    margin: 4px;
+    box-shadow: 0 0 2px 1px @color0;
+}
+
+#workspaces,
+#custom-theme-switcher,
+#pulseaudio {
+    font-size: 24px;
+}
+#workspaces {
+    padding-left: 13px;
+}
+
+#workspaces button {
+    margin-left: 4px;
+    margin-right: 4px;
+    color: @color8;
+}
+
+#workspaces button.active {
+    color: @color1;
+}
+
+#clock {
+    padding-top: 4px;
+}
+
+#pulseaudio {
+    min-width: 20px;
+}
+
+#pulseaudio-slider slider {
+    min-height: 0px;
+    min-width: 0px;
+    box-shadow: none;
+}
+
+#pulseaudio-slider trough {
+    min-height: 10px;
+    min-width: 80px;
+    border-radius: 5px;
+    background-color: @color8;
+}
+
+#pulseaudio-slider highlight {
+    min-width: 10px;
+    border-radius: 4px;
+    background-color: @color1;
+}
+
+#custom-theme-switcher {
+    color: @color1;
+    padding-left: 11px;
+}
+
+#custom-theme-switcher:hover,
+#pulseaudio:hover {
+    color: @color1;
+}
