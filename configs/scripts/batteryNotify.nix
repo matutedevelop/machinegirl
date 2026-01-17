@@ -1,10 +1,8 @@
 {pkgs}:
 
-{
-  batteryNotify = pkgs.writeShellScriptBin "battery-notify" ''
+  pkgs.writeShellScriptBin "battery-notify" ''
 
 
-    #!/usr/bin/env bash
 
     BATTERY=$(upower -e | grep BAT)
     INFO=$(upower -i "$BATTERY")
@@ -25,6 +23,6 @@
 
 
 
-    '';
+    ''
 
-}
+

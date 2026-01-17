@@ -159,6 +159,7 @@
           "$mod,left, exec, playerctl previous"
           "$mod,right, exec, playerctl next"
           "$mod,up, exec, playerctl play-pause"
+          "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
 
           # Dispatchers === === === === === === ===
 
@@ -240,8 +241,9 @@
       "4,left,dispatcher,exec, playerctl previous"
       "4,right,dispatcher,exec, playerctl next"
       "4,up,dispatcher,exec, playerctl volume 0"
-      "3,left,dispatcher,exec, playerctl volume .2+"
-      "3,right,dispatcher,exec, playerctl volume .2-"
+      "4,down,dispatcher,exec, togglefloating"
+      "3,right,dispatcher,exec, playerctl volume .2+"
+      "3,left,dispatcher,exec, playerctl volume .2-"
 
       ];
 

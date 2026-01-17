@@ -64,9 +64,6 @@ in
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
 
-  # -----------------------------------------------------------------------
-  # -----------------------------------------------------------------------
-  # -----------------------------------------------------------------------
 
 
   # The home.packages option allows you to install Nix packages into your
@@ -116,6 +113,7 @@ in
       wget
       ripgrep
       btop
+      nvtopPackages.nvidia
 
 
       #Cloud
@@ -149,12 +147,12 @@ in
       rofi
       swaynotificationcenter
       libnotify
-      neofetch
+      dunst
       fastfetch
       nemo-with-extensions
       waypaper
       cavalier
-      # spotify
+      cava
       vlc
       lenovo-legion
 
@@ -166,7 +164,6 @@ in
       hyprpicker
       pavucontrol
       swayimg
-      rofi-file-browser
       rofi-power-menu
       rofi-calc
       rofi-bluetooth
@@ -181,11 +178,13 @@ in
       brightnessctl
       pdf2svg
       xclip
+      cliphist
       scripts.rofiAudio
       scripts.setWallpaper
       scripts.hyproled
       scripts.hyproledo
       scripts.batteryNotify
+      scripts.cava-waybar
 
 
       #Knowledge
@@ -209,7 +208,6 @@ in
         # Jupyter
         pip
         python-dotenv
-        notebook
         jupyterlab
         xgboost
         openai
@@ -260,7 +258,6 @@ in
       jetbrains.pycharm-professional
       jetbrains.dataspell
       jetbrains.datagrip
-      scripts.notebook
 
       # Productivity
       gimp3
@@ -613,7 +610,7 @@ in
 
     Timer = {
       OnBootSec = "2m";
-      OnUnitActiveSec = "2m";
+      OnUnitActiveSec = "5m";
     };
 
     Install = {

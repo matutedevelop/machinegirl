@@ -46,8 +46,9 @@
 
     // waybar cava ( haven't add in the waybar )
     "custom/cava": {
-        "exec": "~/.config/hypr/scripts/cava.sh",
-        "framerate": 60
+        "exec": "cava-waybar",
+        "framerate": 60,
+        "on-click": "rofi-bluetooth"
     },
 
     

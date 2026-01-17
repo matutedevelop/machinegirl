@@ -102,7 +102,6 @@ tooltip label {
 #window,
 #cpu,
 #disk,
-#idle_inhibitor,
 #custom-updates,
 #custom-clipboard,
 #memory,
@@ -132,8 +131,13 @@ tooltip label {
 #custom-wallpaper {
 
   background: transparent;
-  margin-right: 10px;
-  font-size: 14px;
+  padding: 0 15px;
+  padding-right: 20px;
+  font-size: 15px;
+  border-radius: 10px;
+  color: @foreground;
+  margin-left: 10px;
+
 }
 
 #custom-theme {
@@ -145,6 +149,15 @@ tooltip label {
   padding: 0 10px;
   padding-right: 15px;
   background: transparent;
+
+  background: @background;
+  padding: 0 15px;
+  padding-right: 20px;
+  font-size: 15px;
+  border-radius: 10px;
+  color: @foreground;
+  margin-left: 10px;
+
 }
 
 #memory,
@@ -155,13 +168,6 @@ tooltip label {
   background-color: transparent;
 }
 
-#idle_inhibitor {
-  font-size: 15px;
-  padding: 0 15px;
-  background: @background;    /*QUITAR */
-  border-radius: 10px 0 0 15px;
-  margin-right: 0px;
-}
 
 #hyprland-language {
   font-size: 15px;       /*QUITAR */
@@ -237,11 +243,6 @@ tooltip label {
   border-radius: 10px;
 }
 
-#network,
-#network.speed {
-  background-color: transparent;
-  font-size: 15px;
-}
 
 #custom-updater {
   border-radius: 10px;
@@ -249,9 +250,22 @@ tooltip label {
   margin-right: 10px;
 }
 
+#network,
 #backlight {
-  background-color: transparent;
+  background-color: @background;
   padding: 0 5px;
+  padding: 0 15px;
+  padding-right: 20px;
+  font-size: 15px;
+  border-radius: 10px;
+  color: @foreground;
+  margin-left: 10px;
+}
+
+#network.speed {
+  background-color: transparent;
+  font-size: 15px;
+  
 }
 
 #custom-launch_rofi {
@@ -354,13 +368,13 @@ tooltip label {
 }
 
 #custom-cava {
-  background: #18202a;
-  color: #9db8c1;
+  background: @background;
+  color: @color6;
   opacity: 0.8;
   padding: 0px 10px;
   margin: 3px 0px;
   margin-right: 10px;
   margin-top: 10px;
   border: 0px;
-  border-radius: 10px;
+  border-radius: 5px;
 }

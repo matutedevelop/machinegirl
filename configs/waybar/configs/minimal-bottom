@@ -30,6 +30,7 @@
         "custom/updater", 
         "custom/notify",
         "group/network",
+        "custom/cava",
         "pulseaudio", 
         "battery", 
         "backlight",  

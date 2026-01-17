@@ -31,18 +31,15 @@
         "custom/notify"
     ],
 
+
     "modules-right": [
-        "custom/updater", 
-        "pulseaudio", 
-        "pulseaudio#microphone", 
-        "group/sysinfo", 
-        "group/wall", // group for wallpapers and theme
-        "idle_inhibitor", 
-        "custom/nightlight", 
-        "custom/clipboard", 
-        "battery", 
-        "backlight",  
-        "group/network", 
-        "custom/power_btn"
+    "custom/updater", 
+    "custom/cava", 
+    "group/audio",      
+    "group/appearance",
+    "custom/nightlight", 
+    "custom/clipboard", 
+    "group/system-controls",
+    "custom/power_btn"
     ],
 }

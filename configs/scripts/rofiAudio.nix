@@ -1,7 +1,7 @@
 {pkgs}:
-{
 
-  rofiAudio = pkgs.writeShellScriptBin "rofi-audio" ''
+
+pkgs.writeShellScriptBin "rofi-audio" ''
 
     # Opciones para el menú
     options=" Subir volumen\n Bajar volumen\n Mutear/Desmutear\n󰋋 Cambiar salida"
@@ -27,6 +27,6 @@
             ;;
     esac
 
-  '';
+  ''
 
-}
+

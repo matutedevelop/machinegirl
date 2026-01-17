@@ -97,13 +97,49 @@
 
         "modules": [
             "power-profiles-daemon",
-            "idle_inhibitor", 
             "custom/nightlight", 
             "custom/clipboard", 
         ]
-    }
+    },
 
 
+    // Grupo para batería, wifi e iluminación
+    "group/system-controls": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 300,
+            "children-class": "not-memory",
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "battery",
+            "group/network",
+            "backlight"
+        ]
+    },
+
+    // El grupo de wallpaper y theme ya lo tienes como "group/wall"
+    // Solo necesitas mover el "stack" (sysinfo) junto a él
+    "group/appearance": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 300,
+            "children-class": "not-memory",
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "group/sysinfo",
+            "group/wall"
+        ]
+    },
+
+    "group/audio": {
+    "orientation": "horizontal",
+    "modules": [
+        "pulseaudio",
+        "pulseaudio#microphone"
+    ]
+}
 
 
 }

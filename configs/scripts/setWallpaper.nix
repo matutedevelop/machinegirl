@@ -1,6 +1,6 @@
 {pkgs}:
-{
-  setWallpaper = pkgs.writeShellScriptBin "set-wallpaper" ''
+
+pkgs.writeShellScriptBin "set-wallpaper" ''
     WALLPAPER=$(find "$HOME/Pictures/Wallpapers" -type f \( -iname "*.jpg" -o -iname "*.png" \) | shuf -n 1)
     echo "Selected wallpaper: $WALLPAPER" >> /tmp/hyprpaper.log
     pgrep hyprpaper >/dev/null || hyprpaper & sleep .5
@@ -9,6 +9,6 @@
     wal -i "$WALLPAPER" --backend colorthief
     pkill waybar
     waybar
-  '';
+  ''
 
-}
+
