@@ -147,7 +147,6 @@ in
       rofi
       swaynotificationcenter
       libnotify
-      dunst
       fastfetch
       nemo-with-extensions
       waypaper

@@ -58,7 +58,7 @@
 
 
 
-        "border_size" = "0";
+        "border_size" = "1";
 
         "gaps_in" = "30";
 
@@ -88,23 +88,22 @@
 
         "rounding_power" = "3";
 
-        "inactive_opacity" = "0.7";
+        "inactive_opacity" = "0.5";
 
-        "active_opacity" = "0.9";
+        "active_opacity" = "0.8";
 
         "fullscreen_opacity" = "1";
 
         blur = {
 
-          "size" = "7";
-
-          "passes" = "2";
-
+          "enabled" = "true";
+          "size" = "6";
+          "passes" = "4";
+          "noise" = ".05";
+          "ignore_opacity" = "true";
+          "new_optimizations" = "true";
+          "xray" = "false";
           "popups" = "true";
-
-          "brightness" = "1";
-
-          "contrast" = "1.3";
 
 
         };
@@ -141,6 +140,20 @@
         "opacity 0.8 1, class:^(wezterm)$"
       ];
 
+      layerrule = [
+        # swaync (notificaciones y control center)
+        "animation slide, swaync-notification-window"
+        "animation slide, swaync-control-center"
+        "blur, swaync-notification-window"
+        "blur, swaync-control-center"
+        "ignorealpha 0, swaync-notification-window"
+        "ignorealpha 0, swaync-control-center"
+
+        # rofi
+        "animation popin, rofi"
+        "blur, rofi"
+        "ignorealpha 0, rofi"
+      ];
 
       bind =
         [
@@ -238,13 +251,13 @@
 
       gesture = [
 
-      "3,vertical,workspace"
-      "4,left,dispatcher,exec, playerctl previous"
-      "4,right,dispatcher,exec, playerctl next"
-      "4,up,dispatcher,exec, playerctl volume 0"
-      "4,down,dispatcher,exec, togglefloating"
-      "3,right,dispatcher,exec, playerctl volume .2+"
-      "3,left,dispatcher,exec, playerctl volume .2-"
+        "3,vertical,workspace"
+        "4,left,dispatcher,exec, playerctl previous"
+        "4,right,dispatcher,exec, playerctl next"
+        "4,up,dispatcher,exec, playerctl volume 0"
+        "4,down,dispatcher,exec, togglefloating"
+        "3,right,dispatcher,exec, playerctl volume .2+"
+        "3,left,dispatcher,exec, playerctl volume .2-"
 
       ];
 
