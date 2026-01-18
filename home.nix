@@ -552,6 +552,8 @@ in
     # fastfetch
     ".config/fastfetch".source = ./configs/fastfetch;
 
+    # swaync
+    ".config/swaync".source = ./configs/swaync;
 
 
 

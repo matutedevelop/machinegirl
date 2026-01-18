@@ -4,6 +4,7 @@ pkgs.writeShellScriptBin "cava-waybar" ''
   #!/usr/bin/env bash
 
   bar="▁▂▃▄▅▆▇█"
+
   dict="s/;//g;"
 
   i=0

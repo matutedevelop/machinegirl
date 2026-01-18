@@ -1,361 +1,235 @@
-// vim: fdm=marker
 configuration {
-  modes: "window,drun,run,ssh";
-  font: "JetBrainsMono NF 18";
-  drun-display-format: "{name}";
+    modi: "drun";
+    show-icons: true;
+    icon-theme: "Papirus-Dark";
+    display-drun: "";
+    drun-display-format: "{name}";
+    disable-history: false;
+    hide-scrollbar: true;
+    sidebar-mode: false;
+    terminal: "kitty";
+    font: "Monoid Nerd Font Mono 12";
 }
 
 * {
-  // general
-  bg: #282828;
-  bgt: #28282895;
-  t: transparent;
-  fg: #d4be98;
-
-  selected-bg: @fg;
-  selected-fg: @bg;
-
-  // for windows
-  active: #a9b665;
-  urgent: #fb4934;
+    background: transparent;
+    background-alt: transparent;
+    foreground: #ffffffee;
+    selected: #ffffff20;
+    active: #ffffff15;
+    urgent: #ff5555aa;
+    border-colour: transparent;
+    separatorcolor: transparent;
+    background-color: transparent;
+    text-color: @foreground;
 }
 
 window {
-  fullscreen: true;
-  padding: 35% 30%;       // you might want to ajust these to resize rofi.
-  transparency: "real";
-  background-color: @bgt;
-  border-color: @t;
+    transparency: "real";
+    location: center;
+    anchor: center;
+    width: 550px;
+    border: 0;
+    border-radius: 16px;
+    background-color: #00000066;
 }
 
-listview {
-  border: 0 0 0 0;
-  padding: 23 0 0;
-  scrollbar: true;
-}
-
-scrollbar {
-    width:        4px;
-    border:       0;
-    handle-color: @fg;
-    handle-width: 8px;
-    padding:      0 5;
-}
-
-entry {
-    placeholder: "";
-}
-
-// less interesting stuff {{{
-
-// using elements from:
-// https://github.com/bardisty/gruvbox-rofi/blob/master/gruvbox-common.rasi
-
-textbox {
-    text-color: @fg;
-}
-
-element {
-    border:  0;
-    padding: 2px;
-}
-element.normal.normal {
-    background-color: @t;
-    text-color:       @fg;
-}
-element.normal.urgent {
-    background-color: @t;
-    text-color:       @urgent;
-}
-element.normal.active {
-    background-color: @t;
-    text-color:       @active;
-}
-element.selected.normal {
-    background-color: @selected-bg;
-    text-color:       @selected-fg;
-}
-element.selected.urgent {
-    background-color: @selected-bg;
-    text-color:       @urgent;
-}
-element.selected.active {
-    background-color: @selected-bg;
-    text-color:       @selected-fg;
-}
-element.alternate.normal {
-    background-color: @t;
-    text-color:       @fg;
-}
-element.alternate.urgent {
-    background-color: @t;
-    text-color:       @urgent;
-}
-element.alternate.active {
-    background-color: @t;
-    text-color:       @active;
-}
-
-sidebar {
-    border:       2px 0 0;
-    border-color: @fg;
+mainbox {
+    padding: 20px;
+    spacing: 0px;
+    background-color: transparent;
+    children: [ "inputbar", "listview" ];
 }
 
 inputbar {
-    spacing:    0;
-    text-color: @fg;
-    padding:    2px;
-    children:   [ prompt, textbox-prompt-sep, entry, case-indicator ];
+    padding: 16px 20px;
+    margin: 0;
+    border: 0;
+    border-radius: 12px;
+    background-color: #ffffff08;
+    children: [ "entry" ];
 }
 
-case-indicator,
-entry,
-prompt,
-button {
-    spacing:    0;
-    text-color: @fg;
+prompt {
+    enabled: false;
 }
 
-button.selected {
-    background-color: @bg;
-    text-color:       @fg;
+entry {
+    placeholder: "search applications...";
+    placeholder-color: #ffffff50;
+    background-color: transparent;
+    text-color: #ffffffee;
+    horizontal-align: 0.5;
+    cursor: text;
+    font: "Monoid Nerd Font Mono 11";
 }
 
-textbox-prompt-sep {
-    expand:     false;
-    str:        ":";
-    text-color: @fg;
-    margin:     0 0.3em 0 0;
+listview {
+    columns: 1;
+    lines: 1;              
+    spacing: 6px;
+    cycle: true;
+    dynamic: true;
+    scrollbar: false;
+    layout: vertical;
+    fixed-height: false;   
+    fixed-columns: true;
+    background-color: transparent;
+    margin: 8px 0px 0px 0px;
 }
-// }}}
 
+element {
+    padding: 12px 16px;
+    spacing: 14px;
+    border-radius: 10px;
+    background-color: transparent;
+    cursor: pointer;
+}
 
+element normal.normal {
+    background-color: transparent;
+    text-color: #ffffffd0;
+}
 
+element selected.normal {
+    background-color: #ffffff20;
+    text-color: #ffffffff;
+}
 
+element alternate.normal {
+    background-color: transparent;
+    text-color: #ffffffd0;
+}
 
+element-icon {
+    size: 32px;
+    background-color: transparent;
+    cursor: inherit;
+}
 
-
-
-// @theme "wal"
-// 
-// * {
-//     font: "IosevkaTerm Nerd Font 14";
-// 
-//     g-spacing: 10px;
-//     g-margin: 0;
-//     b-color: @normal-background;
-//     fg-color: @normal-foreground;
-//     fgp-color: @urgent-background;
-//     b-radius: 8px;
-//     g-padding: 8px;
-//     hl-color: @selected-normal-background;
-//     hlt-color: @selected-normal-foreground;
-//     alt-color: @alternate-normal-background;
-//     wbg-color: @normal-background;
-//     w-border: 2px solid;
-//     w-border-color: @urgent-background;
-//     w-padding: 12px;
-// }
-// 
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    highlight: none;
+    vertical-align: 0.5;
+    horizontal-align: 0.0;
+    cursor: inherit;
+    font: "Monoid Nerd Font Mono 12";
+}
 // configuration {
 //     modi: "drun";
 //     show-icons: true;
-//     display-drun: "";
-// }
-// 
-// listview {
-//     columns: 1;
-//     lines: 7;
-//     fixed-height: true;
-//     fixed-columns: true;
-//     cycle: false;
-//     scrollbar: false;
-//     border: 0px solid;
-// }
-// 
-// window {
-//     transparency: "real";
-//     width: 450px;
-//     border-radius: @b-radius;
-//     background-color: @wbg-color;
-//     border: @w-border;
-//     border-color: @w-border-color;
-//     padding: @w-padding;
-// }
-// 
-// prompt {
-//     text-color: @fg-color;
-// }
-// 
-// inputbar {
-//     children: ["prompt", "entry"];
-//     spacing: @g-spacing;
-// }
-// 
-// entry {
-//     placeholder: "Search Apps";
-//     text-color: @fg-color;
-//     placeholder-color: @fgp-color;
-// }
-// 
-// mainbox {
-//     spacing: @g-spacing;
-//     margin: @g-margin;
-//     padding: @g-padding;
-//     children: ["inputbar", "listview", "message"];
-// }
-// 
-// element {
-//     spacing: @g-spacing;
-//     margin: @g-margin;
-//     padding: @g-padding;
-//     border: 0px solid;
-//     border-radius: @b-radius;
-//     border-color: @b-color;
-//     background-color: transparent;
-//     text-color: @fg-color;
-// }
-// 
-// element normal.normal {
-//     background-color: transparent;
-//     text-color: @fg-color;
-// }
-// 
-// element alternate.normal {
-//     background-color: @alt-color;
-//     text-color: @fg-color;
-// }
-// 
-// element selected.active {
-//     background-color: @hl-color;
-//     text-color: @hlt-color;
-// }
-// 
-// element selected.normal {
-//     background-color: @hl-color;
-//     text-color: @hlt-color;
-// }
-// 
-// message {
-//     background-color: @selected-urgent-background;
-//     border: 0px solid;
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// configuration {
-//     modi: "run,drun";
-//     lines: 6;
-//     font: "JetBrainsMono Nerd Font 14";
-//     show-icons: true;
-//     icon-theme: "Oranchelo";
-//     terminal: "st";
-//     drun-display-format: "{icon} {name}";
-//     location: 0;
+//     icon-theme: "Papirus-Dark";
+//     display-drun: "";
+//     drun-display-format: "{name}";
 //     disable-history: false;
 //     hide-scrollbar: true;
-//     display-drun: "   Apps ";
-//     display-run: "   Run ";
-//     display-window: " 﩯  window";
-//     display-Network: " 󰤨  Network";
-//     sidebar-mode: true;
+//     sidebar-mode: false;
+//     terminal: "kitty";
+//     font: "Monoid Nerd Font Mono 12";
 // }
-// 
-// element-text, element-icon, mode-switcher {
-//     background-color: inherit;
-//     text-color: inherit;
+//
+// * {
+//     background: transparent;
+//     background-alt: transparent;
+//     foreground: #ffffffee;
+//     selected: #ffffff20;
+//     active: #ffffff15;
+//     urgent: #ff5555aa;
+//     border-colour: transparent;
+//     separatorcolor: transparent;
+//     background-color: transparent;
+//     text-color: @foreground;
 // }
-// 
+//
 // window {
-//     height: 360px;
-//     border: 3px;
-//     border-color: @selected-urgent-background;
-//     background-color: @normal-background;
-// }
-// 
-// mainbox {
-//     background-color: @normal-background;
-// }
-// 
-// inputbar {
-//     children: [prompt, entry];
-//     background-color: @normal-background;
-//     border-radius: 6px;
-//     padding: 4px;
-// }
-// 
-// prompt {
-//     background-color: @active-background;
-//     padding: 6px 10px;
-//     text-color: @active-foreground;
-//     border-radius: 4px;
-//     margin: 0px 8px 0px 0px;
-// }
-// 
-// textbox-prompt-colon {
-//     expand: false;
-//     str: ":";
-// }
-// 
-// entry {
-//     padding: 6px 10px;
-//     margin: 0;
-//     text-color: @normal-foreground;
-//     background-color: @normal-background;
-//     placeholder: "Search";
-//     border-radius: 4px;
-// }
-// 
-// listview {
+//     transparency: "real";
+//     location: center;
+//     anchor: center;
+//     width: 550px;
 //     border: 0;
-//     padding: 8px;
-//     margin: 10px 0px 0px 0px;
-//     columns: 2;
-//     background-color: @normal-background;
+//     border-radius: 16px;
+//     background-color: #00000066;
 // }
-// 
-// element {
-//     padding: 5px 8px;
-//     background-color: @normal-background;
-//     text-color: @normal-foreground;
-//     border-radius: 4px;
+//
+// mainbox {
+//     padding: 20px;
+//     spacing: 16px;
+//     background-color: transparent;
+//     children: [ "inputbar", "listview" ];
 // }
-// 
-// element-icon {
-//     size: 25px;
+//
+// inputbar {
+//     padding: 16px 20px;
+//     margin: 0;
+//     border: 0;
+//     border-radius: 12px;
+//     background-color: #ffffff08;
+//     children: [ "entry" ];
 // }
-// 
-// element selected {
-//     background-color: @selected-normal-background;
-//     text-color: @selected-normal-foreground;
+//
+// prompt {
+//     enabled: false;
 // }
-// 
-// mode-switcher {
-//     spacing: 0;
-// }
-// 
-// button {
-//     padding: 8px;
-//     background-color: @alternate-normal-background;
-//     text-color: @normal-foreground;
-//     vertical-align: 0.5;
+//
+// entry {
+//     placeholder: "do you eat flowers?";
+//     placeholder-color: #ffffff50;
+//     background-color: transparent;
+//     text-color: #ffffffee;
 //     horizontal-align: 0.5;
-//     border-radius: 4px;
+//     cursor: text;
+//     font: "Monoid Nerd Font Mono 11";
 // }
-// 
-// button selected {
-//     background-color: @selected-active-background;
-//     text-color: @selected-active-foreground;
+//
+// listview {
+//     columns: 1;
+//     lines: 0;
+//     spacing: 6px;
+//     cycle: true;
+//     dynamic: true;
+//     scrollbar: false;
+//     layout: vertical;
+//     fixed-height: true;
+//     fixed-columns: true;
+//     background-color: transparent;
 // }
-// 
+//
+// element {
+//     padding: 12px 16px;
+//     spacing: 14px;
+//     border-radius: 10px;
+//     background-color: transparent;
+//     cursor: pointer;
+// }
+//
+// element normal.normal {
+//     background-color: transparent;
+//     text-color: #ffffffd0;
+// }
+//
+// element selected.normal {
+//     background-color: #ffffff20;
+//     text-color: #ffffffff;
+// }
+//
+// element alternate.normal {
+//     background-color: transparent;
+//     text-color: #ffffffd0;
+// }
+//
+// element-icon {
+//     size: 32px;
+//     background-color: transparent;
+//     cursor: inherit;
+// }
+//
+// element-text {
+//     background-color: transparent;
+//     text-color: inherit;
+//     highlight: none;
+//     vertical-align: 0.5;
+//     horizontal-align: 0.0;
+//     cursor: inherit;
+//     font: "Monoid Nerd Font Mono 12";
+// }

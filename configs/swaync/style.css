@@ -1,0 +1,147 @@
+@import url("file:///.cache/wal/colors.css");
+
+* {
+  font-family: "Monoid Nerd Font Mono";
+  font-size: 16px;
+}
+
+.notification {
+  border-radius: 12px;
+  padding: 12px;
+  margin: 8px;
+  background-color: alpha(@background, 0.8);
+  border: 1px solid @color1;
+}
+
+.notification-content {
+  padding: 8px;
+}
+
+.notification-title {
+  font-weight: 600;
+  font-size: 15px;
+  color: @color5;
+  margin-bottom: 6px;
+}
+
+.notification-body {
+  font-size: 13px;
+  color: alpha(@color7, 0.85);
+  border-radius: 14px;
+  line-height: 1.4;
+}
+
+.notification-action {
+  border-radius: 8px;
+  padding: 6px 12px;
+  margin: 4px;
+  font-size: 13px;
+}
+
+.notification-icon {
+  margin-right: 12px;
+  min-width: 42px;
+  min-height: 42px;
+}
+
+.control-center {
+  border-radius: 14px;
+  padding: 16px;
+  background-color: alpha(@color5, 0.9);
+  border: 1px solid alpha(@color1, 0.3);
+}
+
+.control-center-list {
+  margin-top: 12px;
+  border-radius: 14px;
+}
+
+.widget-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  padding: 8px;
+}
+
+.widget-dnd {
+  border-radius: 10px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+button {
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  min-height: 36px;
+}
+
+/* Volume slider */
+.widget-volume {
+  margin: 12px 8px 16px 8px;
+  padding: 8px;
+}
+
+.widget-volume scale {
+  min-height: 8px;
+}
+
+.widget-volume trough {
+  min-height: 8px;
+  border-radius: 999px;
+  background-color: alpha(@color1, 0.3);
+}
+
+.widget-volume highlight {
+  min-height: 8px;
+  border-radius: 999px;
+  background-color: @color5;
+}
+
+.widget-volume slider {
+  min-width: 16px;
+  min-height: 16px;
+  border-radius: 999px;
+  background-color: @color7;
+}
+
+.widget-buttons-grid {
+  padding: 8px;
+}
+
+.widget-buttons-grid button {
+  min-width: 60px;
+  min-height: 50px;
+  margin: 6px;
+  border-radius: 12px;
+  background-color: alpha(@color1, 0.5);
+  border: 1px solid alpha(@color1, 0.7);
+  font-size: 20px;
+}
+
+.widget-buttons-grid button:hover {
+  background-color: alpha(@color5, 0.7);
+}
+
+.empty {
+  margin-top: 24px;
+  opacity: 0.55;
+}
+
+.empty label {
+  font-size: 14px;
+}
+
+.notification.low progressbar {
+  min-height: 6px;
+  border-radius: 10px;
+}
+
+.notification.low progressbar trough {
+  min-height: 6px;
+  padding: 0;
+}
+
+.notification.low progressbar progress {
+  min-height: 6px;
+}

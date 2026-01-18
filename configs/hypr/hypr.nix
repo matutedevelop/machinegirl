@@ -138,6 +138,7 @@
         "opacity 1 1, class:^(dataspell)$"
         "opacity 0.7 0.5, class:^(spotify)$"
         "opacity 0.6 0.5, class:^(wezterm)$"
+        "opacity 0.8 1, class:^(wezterm)$"
       ];
 
 
