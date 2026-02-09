@@ -124,35 +124,65 @@ return {
             vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
         end
 
-        -- require("lspconfig").ty.setup({
-        --     settings = {
-        --         ty = {
-        --             -- ty language server settings go here
-        --         },
-        --     },
-        -- })
-
-        -- lspconfig.ty_ls = {
-        --     default_config = {
-        --         cmd = { "ty", "lsp" },
-        --         filetypes = { "python" },
-        --         root_dir = lspconfig.util.root_pattern("pyproject.toml", ".git"),
-        --     },
-        -- }
-
         vim.lsp.enable("ruff")
         vim.lsp.config("pyright", {
-
             settings = {
                 python = {
                     analysis = {
-                        ignore = { "*" }, -- Using Ruff
+                        ignore = { "*" },
                     },
                 },
             },
         })
 
         vim.lsp.enable("pyright")
+
+        vim.lsp.enable("pyright")
+
+        -- Optional: Only required if you need to update the language server settings
+        vim.lsp.config("ty", {
+
+            capabilities = capabilities,
+
+            cmd = { "ty", "server" },
+
+            -- Archivos que activan el LSP
+            filetypes = { "python" },
+
+            -- Lógica de detección de raíz (Aquí está el truco)
+            root_dir = lspconfig.util.root_pattern("pyproject.toml", "ty.toml", ".git", "requirements.txt", "setup.py")
+                or vim.fn.getcwd(), -- Si no encuentra nada, usa la carpeta actual
+
+            -- Configuraciones opcionales por defecto
+            settings = {
+                ty = {
+                    -- Puedes forzar opciones aquí si no quieres usar archivos .toml
+                    -- pythonVersion = "3.12",
+                },
+            },
+        })
+
+        -- Required: Enable the language server
+        vim.lsp.enable("ty")
+
+        vim.lsp.config("matlab_ls", {
+            -- Configuración básica
+            capabilities = capabilities,
+            cmd = { "matlab-language-server", "--stdio" },
+            filetypes = { "matlab" },
+            root_dir = lspconfig.util.root_pattern(".git", "."),
+            settings = {
+                MATLAB = {
+                    indexWorkspace = true,
+                    installPath = "/path/to/your/MATLAB", -- Ajusta esta ruta
+                    matlabConnectionTiming = "onStart",
+                    telemetry = false,
+                },
+            },
+            single_file_support = true,
+        })
+
+        vim.lsp.enable("matlab_ls")
 
         --
         --Para Lua (lua-language-server)
@@ -174,6 +204,7 @@ return {
 
         -- lspconfig.tinymist.setup({})
         vim.lsp.enable("tinymist")
+
         -- lspconfig.haskell-language-server.setup({})
 
         vim.lsp.config("gopls", {
@@ -235,7 +266,12 @@ return {
         vim.lsp.config("tinymist", {
             capabilities = capabilities,
             settings = {
-                exportPdf = "onType", -- otras opciones: "onType",
+
+                formatterMode = "typstyle",
+
+                exportPdf = "onType",
+
+                semanticTokens = "disable",
             },
         })
 

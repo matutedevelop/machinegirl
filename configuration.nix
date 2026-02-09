@@ -2,32 +2,33 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs,inputs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.home-manager
     ];
 
 
-# Hyperland
+  # Hyperland
 
-programs.hyprland.enable = true;
-programs.hyprland.package = inputs.hyperland.packages.${pkgs.system}.hyprland;
-
-
+  programs.hyprland.enable = true;
+  programs.hyprland.package = inputs.hyperland.packages.${pkgs.system}.hyprland;
 
 
-# greetd
-services.greetd.enable = true;
-services.greetd.settings = {
-  default_session = {
-    command = "Hyprland";
-    user = "arroio";
+
+
+  # greetd
+  services.greetd.enable = true;
+  services.greetd.settings = {
+    default_session = {
+      command = "Hyprland";
+      user = "arroio";
+    };
   };
-};
 
 
 
@@ -39,10 +40,10 @@ services.greetd.settings = {
   # rtkit is optional but recommended
   #security.rtkit.enable = true;
   #services.pipewire = {
-    #enable = true;
-   # alsa.enable = true;
-    #alsa.support32Bit = true;
-    #pulse.enable = true;
+  #enable = true;
+  # alsa.enable = true;
+  #alsa.support32Bit = true;
+  #pulse.enable = true;
   # If you want to use JACK applications, uncomment this
   #jack.enable = true;
   #};
@@ -60,16 +61,16 @@ services.greetd.settings = {
 
   # Bootloader.
 
-boot.loader.grub.enable = true;
-boot.loader.grub.efiSupport = true;
-boot.loader.grub.devices = [ "nodev" ];
+  boot.loader.grub.enable = true;
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.devices = [ "nodev" ];
 
-boot.loader.efi.canTouchEfiVariables = true;
-boot.loader.efi.efiSysMountPoint = "/boot";
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.efiSysMountPoint = "/boot";
 
-boot.loader.systemd-boot.enable = false;
-boot.kernelPackages = pkgs.linuxPackages_latest;
-boot.loader.grub.configurationLimit = 5;
+  boot.loader.systemd-boot.enable = false;
+  boot.kernelPackages = pkgs.linuxPackages;
+  boot.loader.grub.configurationLimit = 5;
 
 
 
@@ -79,7 +80,7 @@ boot.loader.grub.configurationLimit = 5;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Experimental features
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -90,13 +91,21 @@ boot.loader.grub.configurationLimit = 5;
   networking.useDHCP = false;
 
 
-# === === === === ===
-# === === === === ===
-hardware.bluetooth.enable = true;
-services.blueman.enable = true;
+  # === === === === ===
+  # === === === === ===
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
+  # === === === === ===
+  # === === === === ===
+  # === NVDIA ===
 
+  hardware.nvidia.modesetting.enable = true;
+  hardware.nvidia.powerManagement.enable = true;
 
+  # === === === === ===
+  # === === === === ===
+  # === Legion ===
 
 
 
@@ -111,8 +120,16 @@ services.blueman.enable = true;
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  # services.displayManager.sddm.enable = true;
+  # services.desktopManager.plasma6.enable = true;
+
+  # Poweprofiles
+  services.power-profiles-daemon.enable = true;
+
+
+  # Ollama
+  services.ollama.enable = true;
+  services.ollama.package = pkgs.ollama-cuda;
 
 
 
@@ -146,9 +163,9 @@ services.blueman.enable = true;
   };
 
 
-    # Polkit para hyperland
+  # Polkit para hyperland
 
-    security.polkit.enable = true;
+  security.polkit.enable = true;
 
 
 
@@ -165,10 +182,10 @@ services.blueman.enable = true;
   users.users.arroio = {
     isNormalUser = true;
     description = "arroio";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "render" ];
     packages = with pkgs; [
       kdePackages.kate
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -179,23 +196,24 @@ services.blueman.enable = true;
 
 
   home-manager = {
-  extraSpecialArgs = {inherit inputs;};
-  users = {
-  "arroio" = import ./home.nix;
-   };
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      "arroio" = import ./home.nix;
+    };
   };
 
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
     nerd-fonts.fantasque-sans-mono
     nerd-fonts.jetbrains-mono
     nerd-fonts.iosevka-term
     nerd-fonts.monoid
     nerd-fonts.fira-code
+    lmodern
 
     # Stuff para dataspell
     stdenv.cc.cc.lib
@@ -224,20 +242,20 @@ services.blueman.enable = true;
 
   fonts.fontconfig.enable = true;
   fonts.packages = with pkgs;[
-     nerd-fonts.fantasque-sans-mono
-     nerd-fonts.jetbrains-mono
-     nerd-fonts.iosevka-term
-     nerd-fonts.monoid
-     nerd-fonts.fira-code
-     nerd-fonts.victor-mono
-     nerd-fonts.blex-mono
+    nerd-fonts.fantasque-sans-mono
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.iosevka-term
+    nerd-fonts.monoid
+    nerd-fonts.fira-code
+    nerd-fonts.victor-mono
+    nerd-fonts.blex-mono
   ];
 
 
-    # Env variables
+  # Env variables
 
-    # For Dataspell
-    # environment.variables.LD_LIBRARY_PATH = "${pkgs.gcc.cc.lib}/lib";
+  # For Dataspell
+  # environment.variables.LD_LIBRARY_PATH = "${pkgs.gcc.cc.lib}/lib";
 
 
 
@@ -252,9 +270,9 @@ services.blueman.enable = true;
   system.stateVersion = "25.05"; # Did you read the comment?
 
 
-boot.extraModprobeConfig = ''
-  options snd_hda_intel power_save=0
-'';
+  boot.extraModprobeConfig = ''
+    options snd_hda_intel power_save=0
+  '';
 
 
 

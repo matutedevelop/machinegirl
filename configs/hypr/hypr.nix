@@ -69,10 +69,10 @@
         "resize_on_border" = "true";
 
         #"col.inactive_border" = "rgba(0,0,0,75) rgba(123,135,135,90) 60deg";
-        "col.inactive_border" = "rgb(0,0,0) rgb(11,11,30) 120deg";
+        "col.inactive_border" = "rgb(0,0,0) rgb(120,120,120) 120deg";
 
 
-        "col.active_border" = "rgb(92,22,8) rgb(0,0,0) 120deg";
+        "col.active_border" = "rgb(100,100,100) rgb(0,0,0) 120deg";
 
       };
 
@@ -155,91 +155,95 @@
         "ignorealpha 0, rofi"
       ];
 
-      bind =
-        [
-          "$mod,F, exec, zen"
-          "$mod,B, exec, waybar"
-          "$SHIFT,B, exec, pkill waybar"
-          "$mod SHIFT,M, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle"
-          "$mod,T, exec, wezterm"
-          "$mod SHIFT,S, exec, hyprshot -m region"
-          "ALT, SPACE, exec, rofi -show drun"
-          "$mod,Q, killactive"
-          "ALT, Tab, exec, rofi -show window"
-          "$mod SHIFT,E, exec, rofi -show filebrowser"
-          "$mod,E, exec,  nemo"
-          "$mod,M, exec, rofi-audio"
-          "$mod,L, exec, hyprlock"
-          "$mod,left, exec, playerctl previous"
-          "$mod,right, exec, playerctl next"
-          "$mod,up, exec, playerctl play-pause"
-          "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
+      bindr = [
+        "SUPER_SHIFT, Control_R, exec, rofi -show calc -modi calc -no-show-match -no-sort"
+      ];
 
-          # Dispatchers === === === === === === ===
-
-
-          # Navegacion <==> <==> <==> <==> <==>
-          "SHIFT, H, movefocus, l"
-          "SHIFT, J, movefocus, d"
-          "SHIFT, K, movefocus, u"
-          "SHIFT, L, movefocus, r"
+      bind = [
+        "$mod,F, exec, zen"
+        "$mod,B, exec, waybar"
+        "$SHIFT,B, exec, pkill waybar"
+        "$mod SHIFT,M, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle"
+        "$mod,T, exec, wezterm"
+        "$mod SHIFT,S, exec, hyprshot -m region"
+        "ALT, SPACE, exec, rofi -show drun"
+        "$mod,Q, killactive"
+        "ALT, Tab, exec, rofi -show window"
+        "$mod SHIFT,E, exec, rofi -show filebrowser"
+        "$mod,E, exec,  nemo"
+        "$mod,M, exec, rofi-audio"
+        "$mod,L, exec, hyprlock"
+        "$mod,left, exec, playerctl previous"
+        "$mod,right, exec, playerctl next"
+        "$mod,up, exec, playerctl play-pause"
+        "$mod, R, exec, hyprshade on /home/arroio/.config/hypr/shaders/readmode.glsl"
 
 
+        # Dispatchers === === === === === === ===
 
 
-
-          # Mover ventanas <==> <==> <==> <==> <==>
-
-
-          "$mod CTRL, h, resizeactive, -50 0"
-          "$mod CTRL, l, resizeactive, 50 0"
-          "$mod CTRL, k, resizeactive, 0 -50"
-          "$mod CTRL, j, resizeactive, 0 50"
-
-
-          # Mover ventanas <==> <==> <==> <==> <==>
-
-          "ALT, H, movewindow, l"
-          "ALT, J, movewindow, d"
-          "ALT, K, movewindow, u"
-          "ALT, L, movewindow, r"
-
-          "$mod, 0, fullscreen"
-          "$mod, p, togglefloating"
-
-          # Scroll con flechas
-
-          #         "CONTROL, down, exec, wlrctl pointer scroll 120 0 "
-          #         "CONTROL, up, exec, wlrctl pointer scroll -120 0"
-
-
-          # Move to workspace
-          #"$mod ALT, 1, movetoworkspace, 1"
-          #"$mod ALT, 2, movetoworkspace, 2"
-          #"$mod ALT, 3, movetoworkspace, 3"
-          #"$mod ALT, 4, movetoworkspace, 4"
-          #"$mod ALT, 5, movetoworkspace, 5"
-          #"$mod ALT, 6, movetoworkspace, 6"
-          #"$mod ALT, 7, movetoworkspace, 7"
-          #"$mod ALT, 8, movetoworkspace, 8"
-          #"$mod ALT, 9, movetoworkspace, 9"
+        # Navegacion <==> <==> <==> <==> <==>
+        "SHIFT, H, movefocus, l"
+        "SHIFT, J, movefocus, d"
+        "SHIFT, K, movefocus, u"
+        "SHIFT, L, movefocus, r"
 
 
 
 
-        ]
-        ++ (
-          builtins.concatLists (builtins.genList
-            (i:
-              let
-                ws = i + 1;
-              in
-              [
-                "$mod, code:1${toString i}, workspace, ${toString ws}"
-                "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-              ])
-            9)
-        );
+
+        # Mover ventanas <==> <==> <==> <==> <==>
+
+
+        "$mod CTRL, h, resizeactive, -50 0"
+        "$mod CTRL, l, resizeactive, 50 0"
+        "$mod CTRL, k, resizeactive, 0 -50"
+        "$mod CTRL, j, resizeactive, 0 50"
+
+
+        # Mover ventanas <==> <==> <==> <==> <==>
+
+        "ALT, H, movewindow, l"
+        "ALT, J, movewindow, d"
+        "ALT, K, movewindow, u"
+        "ALT, L, movewindow, r"
+
+        "$mod, 0, fullscreen"
+        "$mod, p, togglefloating"
+
+        # Scroll con flechas
+
+        #         "CONTROL, down, exec, wlrctl pointer scroll 120 0 "
+        #         "CONTROL, up, exec, wlrctl pointer scroll -120 0"
+
+
+        # Move to workspace
+        #"$mod ALT, 1, movetoworkspace, 1"
+        #"$mod ALT, 2, movetoworkspace, 2"
+        #"$mod ALT, 3, movetoworkspace, 3"
+        #"$mod ALT, 4, movetoworkspace, 4"
+        #"$mod ALT, 5, movetoworkspace, 5"
+        #"$mod ALT, 6, movetoworkspace, 6"
+        #"$mod ALT, 7, movetoworkspace, 7"
+        #"$mod ALT, 8, movetoworkspace, 8"
+        #"$mod ALT, 9, movetoworkspace, 9"
+
+
+
+
+      ]
+      ++ (
+        builtins.concatLists (builtins.genList
+          (i:
+            let
+              ws = i + 1;
+            in
+            [
+              "$mod, code:1${toString i}, workspace, ${toString ws}"
+              "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+            ])
+          9)
+      );
 
 
 

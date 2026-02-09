@@ -9,6 +9,7 @@ in
     ./configs/hypr/hypr.nix
     ./configs/tmux/tmux.nix
     inputs.spicetify-nix.homeManagerModules.default
+    #./ix/packages.nix
   ];
 
 
@@ -114,7 +115,15 @@ in
       ripgrep
       btop
       nvtopPackages.nvidia
+      mesa-demos
+      gpu-viewer
+      wgpu-utils
+      wgpu-native
+      supergfxctl
+      bc
 
+      #containers
+      docker
 
       #Cloud
       google-cloud-sdk-gce
@@ -137,6 +146,7 @@ in
       hyprlock
       hypridle
       hyprpolkitagent
+      hyprshade
       qt5.qtwayland
       qt6.qtwayland
       hyprpicker
@@ -144,7 +154,6 @@ in
 
       # Desktop
       waybar
-      rofi
       swaynotificationcenter
       libnotify
       fastfetch
@@ -154,6 +163,7 @@ in
       cava
       vlc
       lenovo-legion
+      discord
 
 
 
@@ -163,8 +173,8 @@ in
       hyprpicker
       pavucontrol
       swayimg
+      rofi
       rofi-power-menu
-      rofi-calc
       rofi-bluetooth
       rofi-network-manager
       tint
@@ -177,13 +187,17 @@ in
       brightnessctl
       pdf2svg
       xclip
-      cliphist
+      #cliphist
+      #wl-clipboard
+      open-webui
       scripts.rofiAudio
       scripts.setWallpaper
       scripts.hyproled
       scripts.hyproledo
       scripts.batteryNotify
-      scripts.cava-waybar
+      scripts.cavaWaybar
+      scripts.mdToTypst
+      scripts.tmuxTermToggle
 
 
       #Knowledge
@@ -191,11 +205,19 @@ in
       zathura
       obsidian
       typst
-      anki-bin
+      #anki-bin
       sherlock
 
       # Haskell
       haskell-ci
+      fourmolu
+      (ghc.withPackages
+        (hsPkgs: with hsPkgs; [
+          turtle # Faster startup time with all external shell commands
+          shh # Piping operators and other goodies
+          shh-extras # Try shh as an interactive shell
+        ])
+        )
 
 
 
@@ -215,6 +237,7 @@ in
         unidecode
         nltk
         google-genai
+        ollama
 
         fastparquet
         xlib
@@ -252,6 +275,10 @@ in
         flet-desktop
         selenium
         webdriver-manager
+
+        fastapi
+        uvicorn
+
       ]))
       ty
       jetbrains.pycharm-professional
@@ -272,6 +299,8 @@ in
       cargo
       clippy
 
+      # Matlab kindoff
+      octave
 
       # Go
       go
@@ -336,6 +365,8 @@ in
     enable = true;
     extraConfig = builtins.readFile ./configs/wezterm/wezterm.lua;
   };
+
+
 
   programs.spicetify =
     let
@@ -412,10 +443,12 @@ in
       walr = "cat /home/arroio/.cache/wal/sequences";
       fzz = ''nvim $(fzf -m --preview="bat --color=always {}")'';
       brillo = "brightnessctl s";
+      noidle = "pkill -STOP hypridle";
+      yesidle = "pkill -CONT hypridle";
 
     };
   };
-  # Neovim === === === === === === === === ===
+  #Neovim === === === === === === === === ===
 
   # La mayoria de los plugins se desea de administrar atraves de Lazy y declarando los dotfiles con home-manager, este apartado es exclusivo para aquellos plugins que no puedan ser instalados de esta forma _e.g._ linters, formatters, lsp
 
@@ -430,12 +463,6 @@ in
     vimAlias = true;
 
     plugins = with pkgs.vimPlugins;[
-      # nvim-lspconfig       # El plugin principal para configurar LSPs
-      #nvim-cmp             # Motor de autocompletado
-      #cmp-nvim-lsp         # Fuente LSP para nvim-cmp
-      #cmp_luasnip          # Fuente de snippets para nvim-cmp
-      #conform-nvim         # Gestor de formatters
-      #nvim-lint            # Gestor de linters
       lazy-nvim
 
     ];
@@ -482,151 +509,158 @@ in
 
       # Haskell
       haskell-language-server
-      fourmolu
+
+    # matlab
+    matlab-language-server
 
 
-      # Go
-      go
-      gopls
-      golangci-lint
-      delve
+    # Go
+    go
+    gopls
+    golangci-lint
+    delve
 
-      # Typst
-      tinymist
-
-
-      lazygit
+    # Typst
+    tinymist
+    typstyle
 
 
-    ];
+    lazygit
 
 
-  };
+        ];
 
 
-
-
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
-
-    ".config/rofi/config.rasi".source = ./configs/rofi/config.rasi;
-    ".config/waybar".source = ./configs/waybar;
-
-    # neovim config
-
-    ".config/nvim".source = ./configs/nvim;
-
-    # Zathura
-
-    ".config/zathura".source = ./configs/zathura;
-
-
-    # Nix conf
-    ".config/nix/nix.conf".source = ./configs/nix/nix.conf;
-
-    # Hyprlock
-    ".config/hypr/hyprlock.conf".source = ./configs/hypr/hyprlock.conf;
-    ".config/hypr/hypridle.conf".source = ./configs/hypr/hypridle.conf;
-
-    # hyproled
-    "Dev/TOOLS/hyproled/hyproled".source = ./configs/scripts/nixint/hyproled;
-
-    # Hyprpaper
-    ".config/hypr/hyprpaper.conf".source = ./configs/hypr/hyprpaper.conf;
-
-    # rofi theme
-    ".config/rofi/themes/wal.rasi".source = ./configs/rofi/wal.rasi;
-
-
-    # fastfetch
-    ".config/fastfetch".source = ./configs/fastfetch;
-
-    # swaync
-    ".config/swaync".source = ./configs/swaync;
-
-
-
-  };
+      };
 
 
 
 
+      # Home Manager is pretty good at managing dotfiles. The primary way to manage
+      # plain files is through 'home.file'.
+      home.file = {
+      # # Building this configuration will create a copy of 'dotfiles/screenrc' in
+      # # the Nix store. Activating the configuration will then make '~/.screenrc' a
+      # # symlink to the Nix store copy.
+      # ".screenrc".source = dotfiles/screenrc;
+      # # You can also set the file content immediately.
+      # ".gradle/gradle.properties".text = ''
+      #   org.gradle.console=verbose
+      #   org.gradle.daemon.idletimeout=3600000
+      # '';
+
+      ".config/rofi/config.rasi".source = ./configs/rofi/config.rasi;
+      ".config/waybar".source = ./configs/waybar;
+
+      # neovim config
+
+      ".config/nvim".source = ./configs/nvim;
+
+      # Zathura
+
+      ".config/zathura".source = ./configs/zathura;
+
+
+      # Nix conf
+      ".config/nix/nix.conf".source = ./configs/nix/nix.conf;
+
+      # Hyprlock
+      ".config/hypr/hyprlock.conf".source = ./configs/hypr/hyprlock.conf;
+      ".config/hypr/hypridle.conf".source = ./configs/hypr/hypridle.conf;
+
+      # hyproled
+      "Dev/TOOLS/hyproled/hyproled".source = ./configs/scripts/nixint/hyproled;
+
+      # Hyprpaper
+      ".config/hypr/hyprpaper.conf".source = ./configs/hypr/hyprpaper.conf;
+
+      # rofi theme
+      ".config/rofi/themes/wal.rasi".source = ./configs/rofi/wal.rasi;
+
+
+      # fastfetch
+      ".config/fastfetch".source = ./configs/fastfetch;
+
+      # swaync
+      ".config/swaync".source = ./configs/swaync;
+
+      # shader
+      ".config/hypr/shaders".source = ./configs/hypr/shaders;
 
 
 
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/arroio/etc/profile.d/hm-session-vars.sh
-  #
 
-
-  home.sessionVariables = { };
-
-
-# === === === === === === === === === === ===
-# === === === === === === === === === === ===
-# === === === === === === === === === === ===
-
-  #systemd 
-  systemd.user.services.battery-notify = {
-
-    Unit = {
-      Description = "Battery notification";
     };
 
-    Service = {
-      Type = "oneshot";
-      ExecStart = "${scripts.batteryNotify}/bin/battery-notify";
+
+
+
+
+
+
+      # Home Manager can also manage your environment variables through
+      # 'home.sessionVariables'. These will be explicitly sourced when using a
+      # shell provided by Home Manager. If you don't want to manage your shell
+      # through Home Manager then you have to manually source 'hm-session-vars.sh'
+      # located at either
+      #
+      #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+      #
+      # or
+      #
+      #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
+      #
+      # or
+      #
+      #  /etc/profiles/per-user/arroio/etc/profile.d/hm-session-vars.sh
+      #
+
+
+      home.sessionVariables = { };
+
+
+      # === === === === === === === === === === ===
+      # === === === === === === === === === === ===
+      # === === === === === === === === === === ===
+
+      #systemd 
+      systemd.user.services.battery-notify = {
+
+      Unit = {
+        Description = "Battery notification";
+      };
+
+      Service = {
+        Type = "oneshot";
+        ExecStart = "${scripts.batteryNotify}/bin/battery-notify";
+      };
+
     };
 
-  };
 
+      systemd.user.timers.battery-notify = {
+      Unit = {
+        Description = "Run battery-notify periodically";
+      };
 
-  systemd.user.timers.battery-notify = {
-    Unit = {
-      Description = "Run battery-notify periodically";
+      Timer = {
+        OnBootSec = "2m";
+        OnUnitActiveSec = "5m";
+      };
+
+      Install = {
+        WantedBy = [ "timers.target" ];
+      };
     };
 
-    Timer = {
-      OnBootSec = "2m";
-      OnUnitActiveSec = "5m";
-    };
-
-    Install = {
-      WantedBy = [ "timers.target" ];
-    };
-  };
-
-# === === === === === === === === === === ===
-# === === === === === === === === === === ===
-# === === === === === === === === === === ===
+      # === === === === === === === === === === ===
+      # === === === === === === === === === === ===
+      # === === === === === === === === === === ===
 
 
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-}
+      # Let Home Manager install and manage itself.
+      programs.home-manager.enable = true;
+      }
 
 
 

@@ -55,7 +55,7 @@ prompt {
 }
 
 entry {
-    placeholder: "search applications...";
+    placeholder: "DO YOU EAT FLOWERS?";
     placeholder-color: #ffffff50;
     background-color: transparent;
     text-color: #ffffffee;

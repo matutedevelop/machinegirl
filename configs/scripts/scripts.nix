@@ -6,5 +6,7 @@
   hyproledo = import ./hyproledo.nix { inherit pkgs; };
   rofiAudio = import ./rofiAudio.nix { inherit pkgs; };
   setWallpaper = import ./setWallpaper.nix { inherit pkgs; };
-  cava-waybar = import ./cava.nix { inherit pkgs; };
+  cavaWaybar = import ./cava.nix { inherit pkgs; };
+  mdToTypst = import ./mdToTypst.nix {inherit pkgs; };
+  tmuxTermToggle = import ./tmuxTermToggle.nix {inherit pkgs; };
 }

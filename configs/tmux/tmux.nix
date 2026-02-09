@@ -48,6 +48,10 @@
 
 
 
+    bind-key -n 'C-\' run-shell -b "tmux-term-toggle a"
+    bind-key -n 'C-/' run-shell -b "tmux-term-toggle"
+
+
 
       bind -n C-h if-shell "$is_vim" "send-keys C-h" "select-pane -L"
       bind -n C-j if-shell "$is_vim" "send-keys C-j" "select-pane -D"
