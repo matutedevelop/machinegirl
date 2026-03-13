@@ -163,8 +163,10 @@ in
       cava
       vlc
       lenovo-legion
-      discord
 
+     
+     #databases
+     postgresql_18
 
 
       # Utilities
@@ -190,6 +192,7 @@ in
       #cliphist
       #wl-clipboard
       open-webui
+      gnuplot
       scripts.rofiAudio
       scripts.setWallpaper
       scripts.hyproled
@@ -262,6 +265,7 @@ in
         torch
         yfinance
         jax
+        cupy
         numba
         pydantic
         pywal
@@ -275,6 +279,8 @@ in
         flet-desktop
         selenium
         webdriver-manager
+        pyspark
+        snowflake
 
         fastapi
         uvicorn
@@ -616,7 +622,9 @@ in
       #
 
 
-      home.sessionVariables = { };
+      home.sessionVariables = {
+
+      };
 
 
       # === === === === === === === === === === ===

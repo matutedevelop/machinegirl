@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 {
   imports =
@@ -106,6 +106,19 @@
   # === === === === ===
   # === === === === ===
   # === Legion ===
+
+
+
+
+
+  # === === === === ===
+  # === === === === ===
+  # === docker ===
+  virtualisation.docker = {
+    enable = true;
+  };
+
+
 
 
 
@@ -256,6 +269,13 @@
 
   # For Dataspell
   # environment.variables.LD_LIBRARY_PATH = "${pkgs.gcc.cc.lib}/lib";
+  environment.variables = {
+
+    # cupy / cuda  
+    CUDA_PATH = "${pkgs.cudatoolkit}";
+    LD_LIBRARY_PATH = lib.mkForce "/run/opengl-driver/lib:${pkgs.cudaPackages.cuda_nvrtc}/lib:${pkgs.cudaPackages.cudatoolkit}/lib";
+
+  };
 
 
 

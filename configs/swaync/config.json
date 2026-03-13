@@ -15,6 +15,13 @@
 	"timeout": 5000,
 	"timeout-low": 3000,
 	"timeout-critical": 10000,
+    "notification-visibility": {
+      "Spotify": {
+        "timeout": 2500,
+        "transient": true
+      }
+    }
+
 	"fit-to-screen": true,
 	"relative-timestamps": true,
 	"control-center-width": 500,

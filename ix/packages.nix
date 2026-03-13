@@ -81,6 +81,11 @@
       lenovo-legion
 
 
+    # nvdia
+    cudatoolkit
+    cudaPackages.cudnn
+
+
 
       # Utilities
 
@@ -180,7 +185,7 @@
         webdriver-manager
       ]))
       ty
-      jetbrains.pycharm-professional
+      # jetbrains.pycharm-professional
       jetbrains.dataspell
       jetbrains.datagrip
 
