@@ -65,6 +65,10 @@ in
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-38.8.4"
+  ];
+  #nixpkgs.config.cudaSupport = true;
 
 
   # The home.packages option allows you to install Nix packages into your
@@ -104,10 +108,7 @@ in
       #Dev
       home-manager
       pokemonsay
-      pokete
       pokemon-colorscripts-mac
-      kitty
-      yazi-unwrapped
       n8n
       fzf
       bat
@@ -121,6 +122,9 @@ in
       wgpu-native
       supergfxctl
       bc
+      nvidia-container-toolkit
+      cudaPackages.cudnn
+      # vllm
 
       #containers
       docker
@@ -162,11 +166,16 @@ in
       cavalier
       cava
       vlc
-      lenovo-legion
+      discord
 
-     
-     #databases
-     postgresql_18
+      lenovo-legion
+      lm_sensors
+      liquidctl
+      coolercontrol.coolercontrol-gui
+
+
+      #databases
+      postgresql_18
 
 
       # Utilities
@@ -192,7 +201,8 @@ in
       #cliphist
       #wl-clipboard
       open-webui
-      gnuplot
+      # gnuplot
+      obs-studio
       scripts.rofiAudio
       scripts.setWallpaper
       scripts.hyproled
@@ -211,6 +221,7 @@ in
       #anki-bin
       sherlock
 
+
       # Haskell
       haskell-ci
       fourmolu
@@ -220,7 +231,7 @@ in
           shh # Piping operators and other goodies
           shh-extras # Try shh as an interactive shell
         ])
-        )
+      )
 
 
 
@@ -231,7 +242,7 @@ in
 
         # Jupyter
         pip
-        python-dotenv
+        qdrant-client
         jupyterlab
         xgboost
         openai
@@ -241,6 +252,8 @@ in
         nltk
         google-genai
         ollama
+
+        azure-storage-blob
 
         fastparquet
         xlib
@@ -262,7 +275,9 @@ in
         kneed
         umap-learn
         statsmodels
-        torch
+        # torch
+        #torchWithCuda
+        torch-bin
         yfinance
         jax
         cupy
@@ -274,9 +289,11 @@ in
         colorthief
         colorzero
         colormath
-        flet
-        flet-web
-        flet-desktop
+
+        # flet  broken
+
+        # flet-web
+        # flet-desktop
         selenium
         webdriver-manager
         pyspark
@@ -284,12 +301,17 @@ in
 
         fastapi
         uvicorn
+        bcrypt
+        pymc
+        arviz
 
       ]))
       ty
-      jetbrains.pycharm-professional
+      jetbrains.pycharm
       jetbrains.dataspell
       jetbrains.datagrip
+      antigravity-fhs
+
 
       # Productivity
       gimp3
@@ -373,7 +395,6 @@ in
   };
 
 
-
   programs.spicetify =
     let
       spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
@@ -442,7 +463,6 @@ in
     shellAliases = {
 
       rebuild = "sudo nixos-rebuild switch --flake /etc/nixos/#arroio";
-      explorer = "yazi";
       fast = "fastfetch";
       py = "python";
       pip2nixx = "nix run github:nix-community/pip2nix";
@@ -451,6 +471,7 @@ in
       brillo = "brightnessctl s";
       noidle = "pkill -STOP hypridle";
       yesidle = "pkill -CONT hypridle";
+      gs = "git status";
 
     };
   };
@@ -516,159 +537,157 @@ in
       # Haskell
       haskell-language-server
 
-    # matlab
-    matlab-language-server
+      # matlab
+      matlab-language-server
 
 
-    # Go
-    go
-    gopls
-    golangci-lint
-    delve
+      # Go
+      go
+      gopls
+      golangci-lint
+      delve
 
-    # Typst
-    tinymist
-    typstyle
-
-
-    lazygit
+      # Typst
+      tinymist
+      typstyle
 
 
-        ];
+      lazygit
 
 
-      };
+    ];
 
 
-
-
-      # Home Manager is pretty good at managing dotfiles. The primary way to manage
-      # plain files is through 'home.file'.
-      home.file = {
-      # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-      # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-      # # symlink to the Nix store copy.
-      # ".screenrc".source = dotfiles/screenrc;
-      # # You can also set the file content immediately.
-      # ".gradle/gradle.properties".text = ''
-      #   org.gradle.console=verbose
-      #   org.gradle.daemon.idletimeout=3600000
-      # '';
-
-      ".config/rofi/config.rasi".source = ./configs/rofi/config.rasi;
-      ".config/waybar".source = ./configs/waybar;
-
-      # neovim config
-
-      ".config/nvim".source = ./configs/nvim;
-
-      # Zathura
-
-      ".config/zathura".source = ./configs/zathura;
-
-
-      # Nix conf
-      ".config/nix/nix.conf".source = ./configs/nix/nix.conf;
-
-      # Hyprlock
-      ".config/hypr/hyprlock.conf".source = ./configs/hypr/hyprlock.conf;
-      ".config/hypr/hypridle.conf".source = ./configs/hypr/hypridle.conf;
-
-      # hyproled
-      "Dev/TOOLS/hyproled/hyproled".source = ./configs/scripts/nixint/hyproled;
-
-      # Hyprpaper
-      ".config/hypr/hyprpaper.conf".source = ./configs/hypr/hyprpaper.conf;
-
-      # rofi theme
-      ".config/rofi/themes/wal.rasi".source = ./configs/rofi/wal.rasi;
-
-
-      # fastfetch
-      ".config/fastfetch".source = ./configs/fastfetch;
-
-      # swaync
-      ".config/swaync".source = ./configs/swaync;
-
-      # shader
-      ".config/hypr/shaders".source = ./configs/hypr/shaders;
+  };
 
 
 
 
+  # Home Manager is pretty good at managing dotfiles. The primary way to manage
+  # plain files is through 'home.file'.
+  home.file = {
+    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
+    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
+    # # symlink to the Nix store copy.
+    # ".screenrc".source = dotfiles/screenrc;
+    # # You can also set the file content immediately.
+    # ".gradle/gradle.properties".text = ''
+    #   org.gradle.console=verbose
+    #   org.gradle.daemon.idletimeout=3600000
+    # '';
+
+    ".config/rofi/config.rasi".source = ./configs/rofi/config.rasi;
+    ".config/waybar".source = ./configs/waybar;
+
+    # neovim config
+
+    ".config/nvim".source = ./configs/nvim;
+
+    # Zathura
+
+    ".config/zathura".source = ./configs/zathura;
+
+
+    # Nix conf
+    ".config/nix/nix.conf".source = ./configs/nix/nix.conf;
+
+    # Hyprlock
+    ".config/hypr/hyprlock.conf".source = ./configs/hypr/hyprlock.conf;
+    ".config/hypr/hypridle.conf".source = ./configs/hypr/hypridle.conf;
+
+    # hyproled
+    "Dev/TOOLS/hyproled/hyproled".source = ./configs/scripts/nixint/hyproled;
+
+    # Hyprpaper
+    ".config/hypr/hyprpaper.conf".source = ./configs/hypr/hyprpaper.conf;
+
+    # rofi theme
+    ".config/rofi/themes/wal.rasi".source = ./configs/rofi/wal.rasi;
+
+
+    # fastfetch
+    ".config/fastfetch".source = ./configs/fastfetch;
+
+    # swaync
+    ".config/swaync".source = ./configs/swaync;
+
+    # shader
+    ".config/hypr/shaders".source = ./configs/hypr/shaders;
+
+
+
+
+  };
+
+
+
+
+
+
+
+  # Home Manager can also manage your environment variables through
+  # 'home.sessionVariables'. These will be explicitly sourced when using a
+  # shell provided by Home Manager. If you don't want to manage your shell
+  # through Home Manager then you have to manually source 'hm-session-vars.sh'
+  # located at either
+  #
+  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+  #
+  # or
+  #
+  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
+  #
+  # or
+  #
+  #  /etc/profiles/per-user/arroio/etc/profile.d/hm-session-vars.sh
+  #
+
+
+  home.sessionVariables = { };
+
+
+  # === === === === === === === === === === ===
+  # === === === === === === === === === === ===
+  # === === === === === === === === === === ===
+
+  #systemd 
+  systemd.user.services.battery-notify = {
+
+    Unit = {
+      Description = "Battery notification";
     };
 
-
-
-
-
-
-
-      # Home Manager can also manage your environment variables through
-      # 'home.sessionVariables'. These will be explicitly sourced when using a
-      # shell provided by Home Manager. If you don't want to manage your shell
-      # through Home Manager then you have to manually source 'hm-session-vars.sh'
-      # located at either
-      #
-      #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-      #
-      # or
-      #
-      #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-      #
-      # or
-      #
-      #  /etc/profiles/per-user/arroio/etc/profile.d/hm-session-vars.sh
-      #
-
-
-      home.sessionVariables = {
-
-      };
-
-
-      # === === === === === === === === === === ===
-      # === === === === === === === === === === ===
-      # === === === === === === === === === === ===
-
-      #systemd 
-      systemd.user.services.battery-notify = {
-
-      Unit = {
-        Description = "Battery notification";
-      };
-
-      Service = {
-        Type = "oneshot";
-        ExecStart = "${scripts.batteryNotify}/bin/battery-notify";
-      };
-
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${scripts.batteryNotify}/bin/battery-notify";
     };
 
+  };
 
-      systemd.user.timers.battery-notify = {
-      Unit = {
-        Description = "Run battery-notify periodically";
-      };
 
-      Timer = {
-        OnBootSec = "2m";
-        OnUnitActiveSec = "5m";
-      };
-
-      Install = {
-        WantedBy = [ "timers.target" ];
-      };
+  systemd.user.timers.battery-notify = {
+    Unit = {
+      Description = "Run battery-notify periodically";
     };
 
-      # === === === === === === === === === === ===
-      # === === === === === === === === === === ===
-      # === === === === === === === === === === ===
+    Timer = {
+      OnBootSec = "2m";
+      OnUnitActiveSec = "5m";
+    };
+
+    Install = {
+      WantedBy = [ "timers.target" ];
+    };
+  };
+
+  # === === === === === === === === === === ===
+  # === === === === === === === === === === ===
+  # === === === === === === === === === === ===
 
 
-      # Let Home Manager install and manage itself.
-      programs.home-manager.enable = true;
-      }
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
+}
 
 
 

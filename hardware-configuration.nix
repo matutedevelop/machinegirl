@@ -10,10 +10,19 @@
 
     ];
 
+  # FAN SHIT
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot.kernelModules = [ "kvm-intel" "lenovo_legion_module" "it87" "coretemp" "nct6775" ];
+  boot.extraModulePackages = [config.boot.kernelPackages.lenovo-legion-module];
+  hardware.sensor.iio.enable = true;
+  services.udev.extraRules = ''
+    KERNEL=="hidraw*", ATTRS{idVendor}=="048d", ATTRS{idProduct}=="c965", MODE="0666"
+    KERNEL=="hidraw*", ATTRS{idVendor}=="048d", ATTRS{idProduct}=="c966", MODE="0666"
+  '';
+
+
+
 
   fileSystems."/" =
     {
@@ -42,32 +51,32 @@
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
 
-## Legion Audio
+  ## Legion Audio
 
-# hardware.firmware = [
-#   (pkgs.runCommand "legion-audio-patch" {
-#     src = ./aw88399_acf.bin;
-#   } ''
-#     mkdir -p $out/lib/firmware
-#     cp -f $src $out/lib/firmware/aw88399_acf.bin
-#   '')
-# ];
-#
-# boot.kernelPatches = [
-#   {
-#     name = "16iax10h-audio-linux-6.18";
-#     patch = ./16iax10h-audio-linux-6.18.patch;
-#     structuredExtraConfig = with lib.kernel; {
-#       SND_HDA_SCODEC_AW88399 = module;
-#       SND_HDA_SCODEC_AW88399_I2C = module;
-#       SND_SOC_AW88399 = module;
-#       SND_SOC_SOF_INTEL_TOPLEVEL = yes;
-#       SND_SOC_SOF_INTEL_COMMON = module;
-#       SND_SOC_SOF_INTEL_MTL = module;
-#       SND_SOC_SOF_INTEL_LNL = module;
-#     };
-#   }
-# ];
+  # hardware.firmware = [
+  #   (pkgs.runCommand "legion-audio-patch" {
+  #     src = ./aw88399_acf.bin;
+  #   } ''
+  #     mkdir -p $out/lib/firmware
+  #     cp -f $src $out/lib/firmware/aw88399_acf.bin
+  #   '')
+  # ];
+  #
+  # boot.kernelPatches = [
+  #   {
+  #     name = "16iax10h-audio-linux-6.18";
+  #     patch = ./16iax10h-audio-linux-6.18.patch;
+  #     structuredExtraConfig = with lib.kernel; {
+  #       SND_HDA_SCODEC_AW88399 = module;
+  #       SND_HDA_SCODEC_AW88399_I2C = module;
+  #       SND_SOC_AW88399 = module;
+  #       SND_SOC_SOF_INTEL_TOPLEVEL = yes;
+  #       SND_SOC_SOF_INTEL_COMMON = module;
+  #       SND_SOC_SOF_INTEL_MTL = module;
+  #       SND_SOC_SOF_INTEL_LNL = module;
+  #     };
+  #   }
+  # ];
 
 
 

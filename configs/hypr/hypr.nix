@@ -131,29 +131,32 @@
         ];
       };
 
-      windowrule = [
-        "opacity 0.9 0.5, class:^(discord)$"
-        "opacity 0.7 0.4, class:^(zathura)$"
-        "opacity 1 1, class:^(dataspell)$"
-        "opacity 0.7 0.5, class:^(spotify)$"
-        "opacity 0.6 0.5, class:^(wezterm)$"
-        "opacity 0.8 1, class:^(wezterm)$"
-      ];
+
+      # windowrule = [
+      #   "opacity 0.9 0.5, ^(discord)$"
+      #   "opacity 0.7 0.4, ^(zathura)$"
+      #   "opacity 1.0 1.0, ^(dataspell)$"
+      #   "opacity 0.7 0.5, ^(Spotify)$"
+      #   "opacity 0.8 1.0, ^(wezterm)$"
+      # ];
+
+
+
+
 
       layerrule = [
-        # swaync (notificaciones y control center)
-        "animation slide, swaync-notification-window"
-        "animation slide, swaync-control-center"
-        "blur, swaync-notification-window"
-        "blur, swaync-control-center"
-        "ignorealpha 0, swaync-notification-window"
-        "ignorealpha 0, swaync-control-center"
-
-        # rofi
-        "animation popin, rofi"
-        "blur, rofi"
-        "ignorealpha 0, rofi"
+        "animation slide, match:namespace swaync-notification-window"
+        "blur on, match:namespace  swaync-notification-window"
+        "ignore_alpha 0.5, match:namespace swaync-notification-window"
+        "animation slide, match:namespace swaync-control-center"
+        "blur on, match:namespace swaync-control-center"
+        "ignore_alpha 0.5, match:namespace swaync-control-center"
+        "animation popin, match:namespace rofi"
+        "blur on, match:namespace rofi"
+        "ignore_alpha 0.5, match:namespace rofi"
       ];
+
+
 
       bindr = [
         "SUPER_SHIFT, Control_R, exec, rofi -show calc -modi calc -no-show-match -no-sort"
@@ -231,8 +234,7 @@
 
 
 
-      ]
-      ++ (
+      ] ++ (
         builtins.concatLists (builtins.genList
           (i:
             let
@@ -244,7 +246,6 @@
             ])
           9)
       );
-
 
 
       input.touchpad = {

@@ -15,6 +15,7 @@
       tmuxPlugins.better-mouse-mode
       tmuxPlugins.jump
       tmuxPlugins.rose-pine
+      tmuxPlugins.yank
     ];
 
     extraConfig = ''
@@ -23,6 +24,7 @@
       set -ga terminal-overrides ",*256col*:Tc"
       set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
       set-environment -g COLORTERM "truecolor"
+      set -g set-clipboard on
 
 
       # Mouse works as expected

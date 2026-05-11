@@ -89,6 +89,7 @@
   # Enable networking
   networking.networkmanager.enable = true;
   networking.useDHCP = false;
+  networking.firewall.allowedTCPPorts = [ 11434 ];
 
 
   # === === === === ===
@@ -140,9 +141,14 @@
   services.power-profiles-daemon.enable = true;
 
 
-  # Ollama
+  # llama
   services.ollama.enable = true;
   services.ollama.package = pkgs.ollama-cuda;
+  services.ollama.host = "0.0.0.0";
+  services.ollama.environmentVariables = {
+    OLLAMA_HOST = "0.0.0.0:11434";
+    OLLAMA_ORIGINS = "*"; # Necesario si vas a usar web UIs externas
+  };
 
 
 
@@ -204,6 +210,7 @@
 
   # Install firefox.
   programs.firefox.enable = true;
+  programs.coolercontrol.enable = true;
 
 
 
