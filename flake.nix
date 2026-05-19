@@ -1,6 +1,20 @@
 {
   description = "Nixos config flake";
 
+  # --- CUDA MANTAINERS ---
+  nixConfig = {
+    extra-substituters = [
+      "https://cuda-maintainers.cachix.org"
+      "https://hyprland.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+    ];
+  };
+  # ------------------------------
+
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -17,20 +31,20 @@
 
     # Zen
     zen-browser.url = "github:youwen5/zen-browser-flake/5f8f1af9d29c59175e95937f14e0c4ba6418f2cb";
-
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
 
   };
 
-  outputs = { self, nixpkgs, nixos-hardware,... }@inputs: {
+  outputs = { self, nixpkgs, nixos-hardware, ... }@inputs: {
     # use "nixos", or your hostname as the name of the configuration
     # it's a better practice than "default" shown in the video
     nixosConfigurations.arroio = nixpkgs.lib.nixosSystem {
 
-      specialArgs = {inherit inputs;};
+      specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix
         inputs.home-manager.nixosModules.home-manager

@@ -82,6 +82,12 @@
   # Experimental features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # cachix
+  nix.settings.trusted-users = [ "root" "@wheel" ];
+
+
+# === NETWORKING
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -91,6 +97,7 @@
   networking.useDHCP = false;
   networking.firewall.allowedTCPPorts = [ 11434 ];
 
+# === NETWORKING
 
   # === === === === ===
   # === === === === ===
@@ -103,6 +110,18 @@
 
   hardware.nvidia.modesetting.enable = true;
   hardware.nvidia.powerManagement.enable = true;
+  hardware.graphics.enable32Bit = true;
+
+
+
+  # === === === === ===
+  # === === === === ===
+  # === docker ===
+  virtualisation.docker = {
+    enable = true;
+    enableNvidia = true;
+  };
+  hardware.nvidia-container-toolkit.enable = true;
 
   # === === === === ===
   # === === === === ===
@@ -112,12 +131,6 @@
 
 
 
-  # === === === === ===
-  # === === === === ===
-  # === docker ===
-  virtualisation.docker = {
-    enable = true;
-  };
 
 
 
@@ -201,7 +214,7 @@
   users.users.arroio = {
     isNormalUser = true;
     description = "arroio";
-    extraGroups = [ "networkmanager" "wheel" "video" "render" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "render" "docker" ];
     packages = with pkgs; [
       kdePackages.kate
       #  thunderbird

@@ -166,7 +166,9 @@ in
       cavalier
       cava
       vlc
-      discord
+      vesktop
+      #discord
+      davinci-resolve
 
       lenovo-legion
       lm_sensors
@@ -218,8 +220,7 @@ in
       zathura
       obsidian
       typst
-      #anki-bin
-      sherlock
+      anki-bin
 
 
       # Haskell
@@ -277,7 +278,7 @@ in
         statsmodels
         # torch
         #torchWithCuda
-        torch-bin
+        #torch-bin
         yfinance
         jax
         cupy
