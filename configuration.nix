@@ -86,7 +86,7 @@
   nix.settings.trusted-users = [ "root" "@wheel" ];
 
 
-# === NETWORKING
+  # === NETWORKING
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -97,7 +97,7 @@
   networking.useDHCP = false;
   networking.firewall.allowedTCPPorts = [ 11434 ];
 
-# === NETWORKING
+  # === NETWORKING
 
   # === === === === ===
   # === === === === ===
@@ -163,154 +163,168 @@
     OLLAMA_ORIGINS = "*"; # Necesario si vas a usar web UIs externas
   };
 
+  # Tailscale
+  services.tailscale =
+    {
+      enable = true;
+      useRoutingFeatures = "both";
 
-
-  # One Drive support
-  # services.onedrive.enable = true;
-  # Comentario de prueba
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
-
-
-  # Polkit para hyperland
-
-  security.polkit.enable = true;
-
-
-
-
-  programs.nix-ld.enable = true;
-
-
-
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.arroio = {
-    isNormalUser = true;
-    description = "arroio";
-    extraGroups = [ "networkmanager" "wheel" "video" "render" "docker" ];
-    packages = with pkgs; [
-      kdePackages.kate
-      #  thunderbird
-    ];
-  };
-
-  # Install firefox.
-  programs.firefox.enable = true;
-  programs.coolercontrol.enable = true;
-
-
-
-
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = {
-      "arroio" = import ./home.nix;
     };
-  };
 
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
-    nerd-fonts.fantasque-sans-mono
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.iosevka-term
-    nerd-fonts.monoid
-    nerd-fonts.fira-code
-    lmodern
 
-    # Stuff para dataspell
-    stdenv.cc.cc.lib
+      # One Drive support
+      # services.onedrive.enable = true;
+      # Comentario de prueba
 
-  ];
+      # Configure keymap in X11
+      services.xserver.xkb = {
+  layout = "us";
+  variant = "";
+};
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+# Enable CUPS to print documents.
+services.printing.enable = true;
 
-  # List services that you want to enable:
+# Enable sound with pipewire.
+services.pulseaudio.enable = false;
+security.rtkit.enable = true;
+services.pipewire = {
+enable = true;
+alsa.enable = true;
+alsa.support32Bit = true;
+pulse.enable = true;
+# If you want to use JACK applications, uncomment this
+jack.enable = true;
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+# use the example session manager (no others are packaged yet so this is enabled by default,
+# no need to redefine it in your config for now)
+#media-session.enable = true;
+};
 
 
-  fonts.fontconfig.enable = true;
-  fonts.packages = with pkgs;[
-    nerd-fonts.fantasque-sans-mono
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.iosevka-term
-    nerd-fonts.monoid
-    nerd-fonts.fira-code
-    nerd-fonts.victor-mono
-    nerd-fonts.blex-mono
-  ];
+# Polkit para hyperland
 
-
-  # Env variables
-
-  # For Dataspell
-  # environment.variables.LD_LIBRARY_PATH = "${pkgs.gcc.cc.lib}/lib";
-  environment.variables = {
-
-    # cupy / cuda  
-    CUDA_PATH = "${pkgs.cudatoolkit}";
-    LD_LIBRARY_PATH = lib.mkForce "/run/opengl-driver/lib:${pkgs.cudaPackages.cuda_nvrtc}/lib:${pkgs.cudaPackages.cudatoolkit}/lib";
-
-  };
+security.polkit.enable = true;
 
 
 
 
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.05"; # Did you read the comment?
+programs.nix-ld.enable = true;
 
 
-  boot.extraModprobeConfig = ''
+
+
+# Enable touchpad support (enabled default in most desktopManager).
+services.libinput.enable = true;
+
+# Define a user account. Don't forget to set a password with ‘passwd’.
+users.users.arroio = {
+isNormalUser = true;
+description = "arroio";
+extraGroups = [ "networkmanager" "wheel" "video" "render" "docker" ];
+packages = with pkgs; [
+kdePackages.kate
+#  thunderbird
+];
+};
+
+# Install firefox.
+programs.firefox.enable = true;
+programs.coolercontrol.enable = true;
+
+
+
+
+home-manager = {
+extraSpecialArgs = { inherit inputs; };
+users = {
+"arroio" = import ./home.nix;
+};
+};
+
+
+# List packages installed in system profile. To search, run:
+# $ nix search wget
+environment.systemPackages = with pkgs; [
+#  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+#  wget
+nerd-fonts.fantasque-sans-mono
+nerd-fonts.jetbrains-mono
+nerd-fonts.iosevka-term
+nerd-fonts.monoid
+nerd-fonts.fira-code
+lmodern
+
+# Stuff para dataspell
+stdenv.cc.cc.lib
+
+];
+
+# Some programs need SUID wrappers, can be configured further or are
+# started in user sessions.
+# programs.mtr.enable = true;
+# programs.gnupg.agent = {
+#   enable = true;
+#   enableSSHSupport = true;
+# };
+
+# List services that you want to enable:
+
+# Enable the OpenSSH daemon.
+# services.openssh.enable = true;
+
+# Open ports in the firewall.
+# networking.firewall.allowedTCPPorts = [ ... ];
+# networking.firewall.allowedUDPPorts = [ ... ];
+# Or disable the firewall altogether.
+# networking.firewall.enable = false;
+
+
+fonts.fontconfig.enable = true;
+fonts.packages = with pkgs;[
+nerd-fonts.fantasque-sans-mono
+nerd-fonts.jetbrains-mono
+nerd-fonts.iosevka-term
+nerd-fonts.monoid
+nerd-fonts.fira-code
+nerd-fonts.victor-mono
+nerd-fonts.blex-mono
+
+
+ibm-plex
+noto-fonts
+noto-fonts
+
+];
+
+
+# Env variables
+
+# For Dataspell
+# environment.variables.LD_LIBRARY_PATH = "${pkgs.gcc.cc.lib}/lib";
+environment.variables = {
+
+# cupy / cuda  
+CUDA_PATH = "${pkgs.cudatoolkit}";
+LD_LIBRARY_PATH = lib.mkForce "/run/opengl-driver/lib:${pkgs.cudaPackages.cuda_nvrtc}/lib:${pkgs.cudaPackages.cudatoolkit}/lib";
+
+};
+
+
+
+
+
+# This value determines the NixOS release from which the default
+# settings for stateful data, like file locations and database versions
+# on your system were taken. It‘s perfectly fine and recommended to leave
+# this value at the release version of the first install of this system.
+# Before changing this value read the documentation for this option
+# (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+system.stateVersion = "25.05"; # Did you read the comment?
+
+
+boot.extraModprobeConfig = ''
     options snd_hda_intel power_save=0
   '';
 
