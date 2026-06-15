@@ -9,16 +9,18 @@ in
     ./configs/hypr/hypr.nix
     ./configs/tmux/tmux.nix
     inputs.spicetify-nix.homeManagerModules.default
-    #./ix/packages.nix
   ];
 
 
+  home.packages = import ./configs/nix/packages.nix {
+    inherit pkgs inputs scripts;
+
+  };
 
 
   # GTK
 
   gtk = {
-
     enable = true;
     theme = {
       package = pkgs.graphite-gtk-theme;
@@ -39,8 +41,6 @@ in
       package = pkgs.bibata-cursors;
       size = 24;
     };
-
-
   };
 
 
@@ -62,7 +62,7 @@ in
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "25.05"; # Please read the comment before changing.
+  home.stateVersion = "26.05"; # Please read the comment before changing.
 
 
   nixpkgs.config.permittedInsecurePackages = [
@@ -74,310 +74,6 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
 
-
-
-
-  # home.packages = with pkgs;
-  #   [
-  #
-  #     # # Adds the 'hello' command to your environment. It prints a friendly
-  #     # # "Hello, world!" when run.
-  #     # pkgs.hello
-  #
-  #     # # It is sometimes useful to fine-tune packages, for example, by applying
-  #     # # overrides. You can do that directly here, just don't forget the
-  #     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-  #     # # fonts?
-  #     #(pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" "JetBrainsMono" "IosevkaTerm" "Monoid"]; })
-  #     # # You can also create simple shell scripts directly inside your
-  #     # # configuration. For example, this adds a command 'my-hello' to your
-  #     # # environment:
-  #     # (pkgs.writeShellScriptBin "my-hello" ''
-  #     #   echo "Hello, ${config.home.username}!"
-  #     # '')
-  #
-  #
-  #     #Dev
-  #     home-manager
-  #     pokemonsay
-  #     pokemon-colorscripts-mac
-  #     n8n
-  #     fzf
-  #     bat
-  #     wget
-  #     ripgrep
-  #     btop
-  #     nvtopPackages.nvidia
-  #     mesa-demos
-  #     gpu-viewer
-  #     wgpu-utils
-  #     wgpu-native
-  #     supergfxctl
-  #     bc
-  #     nvidia-container-toolkit
-  #     cudaPackages.cudnn
-  #     # vllm
-  #
-  #     #containers
-  #     docker
-  #
-  #     #Cloud
-  #     google-cloud-sdk-gce
-  #     cloudflared
-  #
-  #     # zen
-  #     inputs.zen-browser.packages.${pkgs.system}.default
-  #     chromium
-  #     chromedriver
-  #
-  #
-  #     # Java
-  #     #jdk
-  #     #jdt-language-server
-  #
-  #     # Hyperland requirements
-  #
-  #     hyprshot
-  #     hyprpaper
-  #     hyprlock
-  #     hypridle
-  #     hyprpolkitagent
-  #     hyprshade
-  #     qt5.qtwayland
-  #     qt6.qtwayland
-  #     hyprpicker
-  #
-  #
-  #     # Desktop
-  #     waybar
-  #     swaynotificationcenter
-  #     libnotify
-  #     fastfetch
-  #     nemo-with-extensions
-  #     waypaper
-  #     cavalier
-  #     cava
-  #     vlc
-  #     vesktop
-  #     #discord
-  #     davinci-resolve
-  #
-  #     lenovo-legion
-  #     lm_sensors
-  #     liquidctl
-  #     coolercontrol.coolercontrol-gui
-  #
-  #
-  #     # Databases
-  #     postgresql_18
-  #
-  #
-  #     # Utilities
-  #
-  #     imagemagick
-  #     hyprpicker
-  #     pavucontrol
-  #     swayimg
-  #     rofi
-  #     rofi-power-menu
-  #     rofi-bluetooth
-  #     rofi-network-manager
-  #     tint
-  #     pandoc
-  #     # dotool
-  #     wlrctl
-  #     pulseaudioFull
-  #     playerctl
-  #     pamixer
-  #     brightnessctl
-  #     pdf2svg
-  #     xclip
-  #     #cliphist
-  #     #wl-clipboard
-  #     open-webui
-  #     # gnuplot
-  #     obs-studio
-  #     scripts.rofiAudio
-  #     scripts.setWallpaper
-  #     scripts.hyproled
-  #     scripts.hyproledo
-  #     scripts.batteryNotify
-  #     scripts.cavaWaybar
-  #     scripts.mdToTypst
-  #     scripts.tmuxTermToggle
-  #
-  #
-  #     #Knowledge
-  #
-  #     zathura
-  #     obsidian
-  #     typst
-  #     anki-bin
-  #
-  #
-  #     # Haskell
-  #     haskell-ci
-  #     fourmolu
-  #     (ghc.withPackages
-  #       (hsPkgs: with hsPkgs; [
-  #         turtle # Faster startup time with all external shell commands
-  #         shh # Piping operators and other goodies
-  #         shh-extras # Try shh as an interactive shell
-  #       ])
-  #     )
-  #
-  #
-  #
-  #     # python
-  #     uv
-  #     maturin
-  #     (python313.withPackages (ps: with ps; [
-  #
-  #       # Jupyter
-  #       pip
-  #       qdrant-client
-  #       jupyterlab
-  #       xgboost
-  #       openai
-  #       ipywidgets
-  #       ipycanvas
-  #       unidecode
-  #       nltk
-  #       google-genai
-  #       ollama
-  #
-  #       azure-storage-blob
-  #
-  #       fastparquet
-  #       xlib
-  #       mpl-typst
-  #       typst
-  #       plotly
-  #       pandas
-  #       openpyxl
-  #       opencv4
-  #       geopandas
-  #       polars
-  #       requests
-  #       numpy
-  #       scipy
-  #       matplotlib
-  #       seaborn
-  #       tkinter
-  #       scikit-learn
-  #       kneed
-  #       umap-learn
-  #       statsmodels
-  #       # torch
-  #       #torchWithCuda
-  #       #torch-bin
-  #       yfinance
-  #       jax
-  #       cupy
-  #       numba
-  #       pydantic
-  #       pywal
-  #       graphviz
-  #       optuna
-  #       colorthief
-  #       colorzero
-  #       colormath
-  #
-  #       # flet  broken
-  #
-  #       # flet-web
-  #       # flet-desktop
-  #       selenium
-  #       webdriver-manager
-  #       pyspark
-  #       snowflake
-  #
-  #       fastapi
-  #       uvicorn
-  #       bcrypt
-  #       pymc
-  #       arviz
-  #
-  #     ]))
-  #     ty
-  #     jetbrains.pycharm
-  #     jetbrains.dataspell
-  #     jetbrains.datagrip
-  #     antigravity-fhs
-  #
-  #
-  #     # Productivity
-  #     gimp3
-  #     inkscape
-  #
-  #     # C
-  #     gcc
-  #     zeromq
-  #
-  #     # Rust
-  #     rustc
-  #     rustfmt
-  #     cargo
-  #     clippy
-  #
-  #     # Matlab kindoff
-  #     octave
-  #
-  #     # Go
-  #     go
-  #     gopls
-  #     golangci-lint
-  #     delve
-  #
-  #
-  #     #JS
-  #     nodejs_20
-  #
-  #     # # R
-  #     # (rstudioWrapper.override {
-  #     #   packages = with rPackages; [
-  #     #     AmesHousing
-  #     #     agricolae
-  #     #     EnvStats
-  #     #     rmarkdown
-  #     #     fastDummies
-  #     #     knitr
-  #     #     yaml
-  #     #     htmltools
-  #     #     dplyr
-  #     #     ggplot2
-  #     #     languageserver
-  #     #     readxl
-  #     #     moments
-  #     #     BSDA
-  #     #     tidyr
-  #     #   ];
-  #     # })
-  #     # (rWrapper.override {
-  #     #   packages = with rPackages; [
-  #     #
-  #     #     rmarkdown
-  #     #     fastDummies
-  #     #     knitr
-  #     #     yaml
-  #     #     htmltools
-  #     #     dplyr
-  #     #     ggplot2
-  #     #     languageserver
-  #     #     readxl
-  #     #     moments
-  #     #     BSDA
-  #     #
-  #     #
-  #     #   ];
-  #     # })
-  #
-  #   ];
-
-
-home.packages = import ./configs/nix/packages.nix {
-  inherit pkgs inputs scripts;
-};
 
 
 
@@ -455,7 +151,12 @@ home.packages = import ./configs/nix/packages.nix {
   # Bash
   programs.bash = {
     enable = true;
-    initExtra = "walr";
+    initExtra = ''
+        walr
+      if [[ -z "$TMUX" && $- == *i* ]]; then
+        exec tmux new-session \; send-keys "fast" Enter
+      fi
+    '';
     shellAliases = {
 
       rebuild = "sudo nixos-rebuild switch --flake /etc/nixos/#arroio";
@@ -468,17 +169,13 @@ home.packages = import ./configs/nix/packages.nix {
       noidle = "pkill -STOP hypridle";
       yesidle = "pkill -CONT hypridle";
       gs = "git status";
+      tmk = "tmux kill-session -t";
 
     };
   };
   #Neovim === === === === === === === === ===
 
   # La mayoria de los plugins se desea de administrar atraves de Lazy y declarando los dotfiles con home-manager, este apartado es exclusivo para aquellos plugins que no puedan ser instalados de esta forma _e.g._ linters, formatters, lsp
-
-
-
-
-
 
   programs.neovim = {
     enable = true;
@@ -552,11 +249,17 @@ home.packages = import ./configs/nix/packages.nix {
 
 
     ];
-
-
   };
 
 
+  # programs.pi.coding-agent = {
+  #   enable = true;
+  #   # rules = ''Be concise.'';
+  #   # skills = [ ./skills/my-skill ];
+  #   # models = ./models.json;
+  #   # settings.model = "gpt-5";
+  #   # environment.OPENAI_API_KEY = config.age.secrets.openai.path;
+  # };
 
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -676,13 +379,42 @@ home.packages = import ./configs/nix/packages.nix {
     };
   };
 
-  # === === === === === === === === === === ===
-  # === === === === === === === === === === ===
-  # === === === === === === === === === === ===
+
+  # Odoo2Neon data pipeline
+  systemd.user.services.odoo-sync = {
+    Unit = {
+      Description = "Sync Odoo → Neon";
+    };
+    Service = {
+      Type = "oneshot";
+      # Nota: En systemd --user no necesitas definir 'User', ya corre como tú.
+      Environment = "HOME=/home/arroio";
+      WorkingDirectory = "/home/arroio/Dev/WRK/clarovent/DE/odoo2neon";
+      ExecStart = "/home/arroio/Dev/WRK/clarovent/DE/.devenv/state/venv/bin/python /home/arroio/Dev/WRK/clarovent/DE/odoo2neon/pipeline.py";
+    };
+  };
+
+  systemd.user.timers.odoo-sync = {
+    Install = {
+      WantedBy = [ "timers.target" ];
+    };
+    Timer = {
+      OnCalendar = "Mon,Wed,Fri 07:00";
+      Persistent = true;
+      Unit = "odoo-sync.service";
+    };
+  };
 
 
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+
+
+# === === === === === === === === === === ===
+# === === === === === === === === === === ===
+# === === === === === === === === === === ===
+
+
+# Let Home Manager install and manage itself.
+programs.home-manager.enable = true;
 }
 
 

@@ -17,6 +17,7 @@
   wayland.windowManager.hyprland = {
     enable = true;
 
+    configType = "hyprlang";
 
 
     settings = {
@@ -165,7 +166,7 @@
       bind = [
         "$mod,F, exec, zen"
         "$mod,B, exec, waybar"
-        "$SHIFT,B, exec, pkill waybar"
+        "SHIFT,B, exec, pkill waybar"
         "$mod SHIFT,M, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle"
         "$mod,T, exec, wezterm"
         "$mod SHIFT,S, exec, hyprshot -m region"
@@ -243,6 +244,10 @@
             [
               "$mod, code:1${toString i}, workspace, ${toString ws}"
               "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+
+              # "$mod, ${toString ws}, workspace, ${toString ws}"
+              # "$mod SHIFT, ${toString ws}, movetoworkspace, ${toString ws}"
+
             ])
           9)
       );

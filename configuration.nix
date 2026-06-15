@@ -83,7 +83,20 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # cachix
-  nix.settings.trusted-users = [ "root" "@wheel" ];
+  nix.settings = {
+
+ trusted-users = [ "root" "@wheel" "arroio" ];
+  substituters = [
+    "https://cache.nixos.org"
+    "https://cuda-maintainers.cachix.org"
+    "https://hyprland.cachix.org"
+  ];
+  trusted-public-keys = [
+    "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+    "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+  ];
+};
 
 
   # === NETWORKING
@@ -111,6 +124,7 @@
   hardware.nvidia.modesetting.enable = true;
   hardware.nvidia.powerManagement.enable = true;
   hardware.graphics.enable32Bit = true;
+  hardware.graphics.enable = true;
 
 
 
@@ -154,7 +168,7 @@
   services.power-profiles-daemon.enable = true;
 
 
-  # llama
+  # ollama
   services.ollama.enable = true;
   services.ollama.package = pkgs.ollama-cuda;
   services.ollama.host = "0.0.0.0";

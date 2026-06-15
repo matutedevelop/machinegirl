@@ -18,11 +18,17 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+
     hyperland.url = "github:hyprwm/Hyprland";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+
+
+
+
+
     };
 
     # Spicetify
@@ -37,9 +43,13 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
 
+    llm-agents.url = "github:numtide/llm-agents.nix";
+
+    hermes-agent.url = "github:NousResearch/hermes-agent";
+
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, ... }@inputs: {
+  outputs = { self, nixpkgs, nixos-hardware, hermes-agent, ... }@inputs: {
     # use "nixos", or your hostname as the name of the configuration
     # it's a better practice than "default" shown in the video
     nixosConfigurations.arroio = nixpkgs.lib.nixosSystem {
@@ -49,6 +59,7 @@
         ./configuration.nix
         inputs.home-manager.nixosModules.home-manager
         nixos-hardware.nixosModules.lenovo-legion-16iax10h
+        hermes-agent.nixosModules.default
 
         {
           nixpkgs.config.allowUnfree = true;
