@@ -6,7 +6,7 @@ pkgs.writeShellScriptBin "set-wallpaper" ''
     pgrep hyprpaper >/dev/null || hyprpaper & sleep .5
     hyprctl hyprpaper preload "$WALLPAPER"
     hyprctl hyprpaper wallpaper ,"$WALLPAPER"
-    wal -i "$WALLPAPER" --backend colorthief
+    wal -i "$WALLPAPER" --backend colorthief --saturate -0.3
     pkill waybar
     waybar
   ''

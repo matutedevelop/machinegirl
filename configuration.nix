@@ -157,6 +157,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   # Enable the X11 windowing system.
+  # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
 
@@ -271,7 +272,7 @@ nerd-fonts.fira-code
 lmodern
 
 # Stuff para dataspell
-stdenv.cc.cc.lib
+# stdenv.cc.cc.lib
 
 ];
 
@@ -318,7 +319,6 @@ noto-fonts
 # For Dataspell
 # environment.variables.LD_LIBRARY_PATH = "${pkgs.gcc.cc.lib}/lib";
 environment.variables = {
-
 # cupy / cuda  
 CUDA_PATH = "${pkgs.cudatoolkit}";
 LD_LIBRARY_PATH = lib.mkForce "/run/opengl-driver/lib:${pkgs.cudaPackages.cuda_nvrtc}/lib:${pkgs.cudaPackages.cudatoolkit}/lib";

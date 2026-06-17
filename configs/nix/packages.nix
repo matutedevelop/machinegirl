@@ -29,6 +29,7 @@ with pkgs;
   wget
   ripgrep
   btop
+  fd
 
 
   # gpu
@@ -251,8 +252,8 @@ with pkgs;
 
   ]))
   ty
-  jetbrains.dataspell
   jetbrains.datagrip
+  jetbrains.pycharm
 
 
   # Productivity

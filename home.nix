@@ -168,8 +168,13 @@ in
       brillo = "brightnessctl --device=intel_backlight set";
       noidle = "pkill -STOP hypridle";
       yesidle = "pkill -CONT hypridle";
-      gs = "git status";
-      tmk = "tmux kill-session -t";
+      gs = "git status | bat";
+      tmk = "tmux kill-session";
+      f = "fd --type f  --exclude .git | fzf-tmux -p | xargs nvim";
+      gb = ''git branch | grep -v "^\*" | fzf --height=20% --reverse --info=inline | xargs git checkout'';
+      hist = "history | fzf-tmux -p";
+      rmm = "rm $(fzf-tmux -p -m)";
+
 
     };
   };
