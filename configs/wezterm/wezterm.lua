@@ -20,9 +20,9 @@ config.term = "xterm-256color" -- Set the terminal type
 
 
 -- config.font = wezterm.font("Iosevka Custom")
-config.font = wezterm.font("IosevkaTerm Nerd Font")
+-- config.font = wezterm.font("IosevkaTerm Nerd Font")
 -- config.font = wezterm.font("Monocraft Nerd Font")
---config.font = wezterm.font("FantasqueSansM Nerd Font")
+config.font = wezterm.font("FantasqueSansM Nerd Font")
 --config.font = wezterm.font("Monoid Nerd Font")
 -- config.font = wezterm.font("BlexMono Nerd Font")
 -- config.font = wezterm.font("FiraCode Nerd Font Mono")

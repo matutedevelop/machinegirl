@@ -1,4 +1,4 @@
-{ pkgs, inputs, scripts, ...}:
+{ pkgs, inputs, scripts, ... }:
 with pkgs;
 [
 
@@ -49,26 +49,12 @@ with pkgs;
 
   # Agents
 
-  opencode
+  # opencode
   # codex
-  # vllm # broken
-   # (pkgs.symlinkJoin {
-   #    name = "pi-coding-agent";
-   #    buildInputs = [ pkgs.makeWrapper ];
-   #    paths = [ pkgs.pi-coding-agent ];
-   #    postBuild = ''
-   #      wrapProgram $out/bin/pi \
-   #        --set NPM_CONFIG_PREFIX "$Home/.pi/npm/" \
-   #        --prefix PATH : ${
-   #          pkgs.lib.makeBinPath [
-   #            pkgs.nodejs_latest
-   #          ]
-   #        }
-   #    '';
-   #  })
-   inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.pi
+  vllm
+  inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.pi
 
-    
+
 
 
   #containers
@@ -121,6 +107,7 @@ with pkgs;
 
   # Databases
   #postgresql_18
+  duckdb
 
 
   # Utilities
@@ -209,12 +196,13 @@ with pkgs;
     opencv4
     geopandas
     polars
+    pyarrow
     requests
     numpy
     scipy
     matplotlib
     seaborn
-    tkinter
+    #tkinter
     scikit-learn
     kneed
     umap-learn
@@ -227,12 +215,13 @@ with pkgs;
     cupy
     numba
     pydantic
-    pywal
-    graphviz
+    # pywal
+    # graphviz
     optuna
     #colorthief
     #colorzero
     #colormath
+    pympler
 
     # flet  broken
     # flet-web
@@ -242,6 +231,7 @@ with pkgs;
 
     pyspark
     snowflake
+    duckdb
     #dlt
 
     fastapi

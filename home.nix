@@ -67,6 +67,7 @@ in
 
   nixpkgs.config.permittedInsecurePackages = [
     "electron-38.8.4"
+    "python3.13-vllm-0.16.0"
   ];
   #nixpkgs.config.cudaSupport = true;
 
