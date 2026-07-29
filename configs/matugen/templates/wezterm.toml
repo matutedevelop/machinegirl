@@ -1,0 +1,29 @@
+[colors]
+background = '{{colors.background.default.hex}}'
+foreground = '{{colors.on_background.default.hex}}'
+cursor_bg = '{{colors.primary.default.hex}}'
+cursor_fg = '{{colors.on_primary.default.hex}}'
+selection_bg = '{{colors.surface_variant.default.hex}}'
+selection_fg = '{{colors.on_surface_variant.default.hex}}'
+
+ansi = [
+  '{{colors.surface.default.hex}}',          # black
+  '{{colors.tertiary.default.hex}}',         # red
+  '{{colors.primary.default.hex}}',          # green
+  '{{colors.tertiary.default.hex}}',         # yellow
+  '{{colors.secondary.default.hex}}',        # blue
+  '{{colors.inverse_primary.default.hex}}',  # magenta
+  '{{colors.outline.default.hex}}',          # cyan
+  '{{colors.on_surface.default.hex}}'        # white
+]
+
+brights = [
+  '{{colors.surface_bright.default.hex}}',     # black
+  '{{colors.tertiary_container.default.hex}}',# red
+  '{{colors.primary_container.default.hex}}', # green
+  '{{colors.tertiary_container.default.hex}}',# yellow
+  '{{colors.secondary_container.default.hex}}',# blue
+  '{{colors.inverse_surface.default.hex}}',   # magenta
+  '{{colors.outline_variant.default.hex}}',   # cyan
+  '{{colors.on_surface_variant.default.hex}}' # white
+]

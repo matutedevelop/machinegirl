@@ -1,4 +1,4 @@
-
+{
     "logo": {
         "type": "builtin",
         "source": "nixos_small",

@@ -1,0 +1,11 @@
+[config]
+wallpaper_common = true
+
+[templates.wezterm]
+input_path = '~/.config/matugen/templates/wezterm.toml'
+output_path = '~/.config/wezterm/colors.toml'
+
+[templates.neovim]
+input_path = "~/.config/matugen/templates/nvim-colors.json"
+output_path = "~/.cache/matugen/nvim-colors.json"
+post_hook = "pkill -SIGUSR1 nvim"

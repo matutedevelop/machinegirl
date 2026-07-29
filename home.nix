@@ -153,7 +153,6 @@ in
   programs.bash = {
     enable = true;
     initExtra = ''
-        walr
       if [[ -z "$TMUX" && $- == *i* ]]; then
         exec tmux new-session \; send-keys "fast" Enter
       fi
@@ -170,15 +169,34 @@ in
       noidle = "pkill -STOP hypridle";
       yesidle = "pkill -CONT hypridle";
       gs = "git status | bat";
+      gb = ''git branch | grep -v "^\*" | fzf --height=20% --reverse --info=inline | xargs git checkout'';
+      gl = "git log | bat";
       tmk = "tmux kill-session";
       f = "fd --type f  --exclude .git | fzf-tmux -p | xargs nvim";
-      gb = ''git branch | grep -v "^\*" | fzf --height=20% --reverse --info=inline | xargs git checkout'';
       hist = "history | fzf-tmux -p";
       rmm = "rm $(fzf-tmux -p -m)";
 
 
     };
   };
+
+
+  # services.hermes-agent = {
+  #   enable = true;
+  #   model = {
+  #     default = "ollama/gemma4:26b_full";
+  #     # o "ollama/qwen3:32b"
+  #     # o "ollama/llama3.3:70b"
+  #   };
+  #   #environmentFiles = [ config.sops.secrets."hermes-env".path ];
+  #   addToSystemPackages = true;
+  # };
+
+
+
+
+
+
   #Neovim === === === === === === === === ===
 
   # La mayoria de los plugins se desea de administrar atraves de Lazy y declarando los dotfiles con home-manager, este apartado es exclusivo para aquellos plugins que no puedan ser instalados de esta forma _e.g._ linters, formatters, lsp
@@ -320,6 +338,9 @@ in
     ".config/hypr/shaders".source = ./configs/hypr/shaders;
 
 
+    # matugen
+    ".config/matugen".source = ./configs/matugen;
+
 
 
   };
@@ -414,13 +435,13 @@ in
 
 
 
-# === === === === === === === === === === ===
-# === === === === === === === === === === ===
-# === === === === === === === === === === ===
+  # === === === === === === === === === === ===
+  # === === === === === === === === === === ===
+  # === === === === === === === === === === ===
 
 
-# Let Home Manager install and manage itself.
-programs.home-manager.enable = true;
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
 }
 
 

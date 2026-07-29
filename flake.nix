@@ -43,7 +43,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
 
-    llm-agents.url = "github:numtide/llm-agents.nix";
+   llm-agents.url = "github:numtide/llm-agents.nix";
 
     hermes-agent.url = "github:NousResearch/hermes-agent";
 

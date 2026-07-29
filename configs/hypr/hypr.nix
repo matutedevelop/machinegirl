@@ -179,9 +179,12 @@
         "$mod,L, exec, hyprlock"
         "$mod,left, exec, playerctl previous"
         "$mod,right, exec, playerctl next"
-        "$mod,up, exec, playerctl play-pause"
         "$mod, R, exec, hyprshade on /home/arroio/.config/hypr/shaders/readmode.glsl"
-
+        "$mod, K, exec, rofi-bluetooth"
+        "$mod,up, exec, pactl set-sink-volume @DEFAULT_SINK@ +15%"
+        "$mod,down, exec, pactl set-sink-volume @DEFAULT_SINK@ -15%"
+        "ALT, up, exec, brightnessctl --device=intel_backlight set +10%"
+        "ALT, down, exec, brightnessctl --device=intel_backlight set 10%-"
 
         # Dispatchers === === === === === === ===
 

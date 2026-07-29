@@ -51,7 +51,7 @@ with pkgs;
 
   # opencode
   # codex
-  vllm
+  # vllm
   inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.pi
 
 
@@ -96,9 +96,9 @@ with pkgs;
   cavalier
   vlc
   vesktop
-  #discord
   davinci-resolve
   libreoffice-fresh
+  matugen
 
   lenovo-legion
   liquidctl
@@ -165,6 +165,7 @@ with pkgs;
 
 
 
+
   # python
   uv
   maturin
@@ -179,6 +180,8 @@ with pkgs;
     openai
     ipywidgets
     ipycanvas
+    marimo
+
     unidecode
     nltk
     google-genai
@@ -190,18 +193,19 @@ with pkgs;
     xlib
     mpl-typst
     typst
-    plotly
+    #plotly
     pandas
     openpyxl
-    opencv4
+    #opencv4
     geopandas
     polars
     pyarrow
-    requests
+    #requests
     numpy
     scipy
     matplotlib
     seaborn
+    altair
     #tkinter
     scikit-learn
     kneed
@@ -215,8 +219,8 @@ with pkgs;
     cupy
     numba
     pydantic
-    # pywal
-    # graphviz
+    pywal
+    graphviz
     optuna
     #colorthief
     #colorzero
@@ -230,12 +234,13 @@ with pkgs;
     webdriver-manager
 
     pyspark
-    snowflake
     duckdb
+    #snowflake
     #dlt
 
     fastapi
     uvicorn
+    prefect
     #bcrypt
     #pymc
     #arviz
